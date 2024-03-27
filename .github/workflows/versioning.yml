@@ -1,0 +1,26 @@
+
+name: Run Versioning and Release
+
+on:
+  workflow_run:
+    workflows: [Build and Test]
+    types:
+      - completed
+
+jobs:
+  run-versioning:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout latest release
+      - uses: actions/checkout@v4
+      - name: Setup Node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run Install 
+        run: npm ci
+      - name: Run Semantic Release
+        run: npx semantic-release
+      
+      

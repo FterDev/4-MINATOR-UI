@@ -28,5 +28,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "semantic-release": "^23.0.6",
     "typescript": "^5"
+  },
+  "release": {
+    "branches": ["main"]
   }
 }

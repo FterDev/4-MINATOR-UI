@@ -27,6 +27,7 @@ jobs:
       with:
         node-version: 20
         cache: 'npm'
+    - run: npm ci
     - name: Run jest Tests
       run: npm run test
     - name: Generate Coverage Report

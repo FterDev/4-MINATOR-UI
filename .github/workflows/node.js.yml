@@ -5,14 +5,13 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -23,12 +22,14 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build
-    - name: Test and Coverage
-    - run: npm run test
-    - run: npx jest --coverage
+    - name: Run Tests
+      run: npm run test
+    - name: Generate Coverage Report
+      run: npx jest --coverage
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+
 
     

@@ -40,6 +40,11 @@ jobs:
   release:
     needs: [build, test]
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write 
+      issues: write
+      pull-requests: write 
+      id-token: write
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js 20

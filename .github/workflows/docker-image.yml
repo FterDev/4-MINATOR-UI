@@ -50,7 +50,7 @@ jobs:
       
       - name: Execute Deploy Script on Remote Server
         run: |
-          ssh -o StrictHostKeyChecking=no deployer@${{ secrets.IFS01_IP }} 'bash ' < /home/deployer/deploy-app.sh
+          ssh -o StrictHostKeyChecking=no deployer@${{ secrets.IFS01_IP }} 'bash /home/deployer/deploy-app.sh'
           
       
     

@@ -46,7 +46,7 @@ jobs:
       - name: Set SSH Keys
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{secrets.IFS01}} 
+          ssh-private-key: ${{secrets.IFS01_KEY}} 
       
       - name: Execute Deploy Script on Remote Server
         run: |

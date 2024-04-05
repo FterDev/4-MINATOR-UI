@@ -1,4 +1,4 @@
-name: Publish Docker Image
+name: Publish Docker Image and Deploy
 
 on:
   release:
@@ -35,3 +35,24 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy_to_int:
+    needs: [push_to_registry]
+    name: Deploy to IFS01
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: ssh deploy
+        uses: easingthemes/ssh-deploy@v5.0.3
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.IFS01_KEY }}
+          REMOTE_HOST: ${{ secrets.IFS01_IP }}
+          REMOTE_USER: deployer
+          SCRIPT_BEFORE: deploy-app.sh
+          
+      
+    
+   
+      
+

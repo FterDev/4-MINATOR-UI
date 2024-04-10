@@ -9,6 +9,11 @@ interface FmCardProps {
     children: React.ReactNode;
 }
 
+const defaultProps: FmCardProps = {
+    title: "",
+    subtitle: "",
+    children: null
+};
 
 function FmCard({ title, subtitle, children }: FmCardProps) {
     return (

@@ -4,16 +4,12 @@ import "./fmcard.css";
 
 
 interface FmCardProps {
-    title: string;
-    subtitle: string;
-    children: React.ReactNode;
+    title?: string;
+    subtitle?: string;
+    children?: React.ReactNode;
 }
 
-const defaultProps: FmCardProps = {
-    title: "",
-    subtitle: "",
-    children: null
-};
+
 
 function FmCard({ title, subtitle, children }: FmCardProps) {
     return (

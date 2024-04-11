@@ -38,7 +38,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.fm-button-filled-primary
+.fm-button-filled-primary, .fm-button-filled-primary::after
 {
     background-color: var(--primary);
 }
@@ -49,7 +49,7 @@
 }
 
 
-.fm-button-filled-secondary
+.fm-button-filled-secondary, .fm-button-filled-secondary::after
 {
     background-color: var(--secondary);  
 
@@ -60,7 +60,7 @@
     border-bottom: 3px solid #420003;   
 }
 
-.fm-button-filled-danger
+.fm-button-filled-danger, .fm-button-filled-danger::after
 {
     background-color: var(--red); 
 }
@@ -70,7 +70,7 @@
     border-bottom: 3px solid #940007;  
 }
 
-.fm-button-filled-success
+.fm-button-filled-success, .fm-button-filled-success::after
 {
     background-color: var(--green); 
 }
@@ -82,14 +82,14 @@
 
 
 
-.fm-button-outlined-primary
+.fm-button-outlined-primary, .fm-button-outlined-primary::after
 {
     background-color: transparent;
     border: 1px solid var(--primary);
     color: var(--primary);
 }
 
-.fm-button-outlined-secondary
+.fm-button-outlined-secondary, .fm-button-outlined-secondary::after
 {
     background-color: transparent;
     border: 1px solid var(--secondary);
@@ -98,40 +98,39 @@
 
 
 
-.fm-button-outlined-danger
+.fm-button-outlined-danger, .fm-button-outlined-danger::after
 {
     background-color: transparent;
     border: 1px solid var(--red);
     color: var(--red);
 }
 
-.fm-button-outlined-success
+.fm-button-outlined-success, .fm-button-outlined-success::after
 {
     background-color: transparent;
     border: 1px solid var(--green);
     color: var(--green);
 }
 
-
-.fm-button-text-primary
+.fm-button-text-primary, .fm-button-text-primary::after
 {
     background-color: transparent;
     color: var(--primary);
 }
 
-.fm-button-text-secondary
+.fm-button-text-secondary, .fm-button-text-secondary::after
 {
     background-color: transparent;
     color: var(--secondary);
 }
 
-.fm-button-text-danger
+.fm-button-text-danger, .fm-button-text-danger::after
 {
     background-color: transparent;
     color: var(--red);
 }
 
-.fm-button-text-success
+.fm-button-text-success, .fm-button-text-success::after
 {
     background-color: transparent;
     color: var(--green);

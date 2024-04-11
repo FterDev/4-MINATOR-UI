@@ -6,6 +6,7 @@ on:
     
 jobs:
   build:
+    name: Build Project
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
@@ -18,6 +19,7 @@ jobs:
     - run: npm run build
 
   test:
+    name: Test Project & Run SonarCloud Scan
     runs-on: ubuntu-22.04
     needs: [build]
     steps:
@@ -38,6 +40,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
 
   release:
+    name: Run Semantic-Release
     needs: [build, test]
     runs-on: ubuntu-22.04
     permissions:

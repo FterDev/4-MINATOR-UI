@@ -26,6 +26,7 @@ const FMInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAli
                 name={name}
                 id={id}
                 placeholder={placeholder}
+                onChange={(e) => onChange && onChange(e.target.value)}
             />
             <label className='fm-input-error' htmlFor={id}>{errorText}</label>
         </div>

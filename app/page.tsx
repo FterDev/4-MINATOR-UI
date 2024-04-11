@@ -1,3 +1,4 @@
+'use client';
 import FmButton from "./components/ui/fmbutton/fmbutton";
 import FmCard from "./components/ui/fmcard/fmcard";
 import FMInput from "./components/ui/fminput/fminput";

@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <FmCard title="Buttons filled">
         <FmButton text="Buttons added!" color="primary" />
-        <FMInput title="Input" name="input" id="input" value="input" placeholder="Test Input" />
+        <FMInput title="Input" name="input" id="input" value="input" placeholder="Test Input" textAlign="right" />
       </FmCard>
       
     </div>

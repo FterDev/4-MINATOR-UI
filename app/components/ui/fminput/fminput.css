@@ -26,6 +26,23 @@
   transition: all 0.3s;
 }
 
+
+.fm-input-field-center
+{
+    text-align: center;
+}
+
+.fm-input-field-left
+{
+    text-align: left;
+}
+
+.fm-input-field-right
+{
+    text-align: right;
+}
+
+
 .fm-input-field:focus {
   outline: none;
   border: 1px solid #fff;

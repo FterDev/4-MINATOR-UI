@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './fminput.scss';
+import './fminput.css';
 
 interface FMInputProps {
     title: string;
@@ -8,22 +8,23 @@ interface FMInputProps {
     placeholder?: string;
     id: string;
     value: string;
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
 }
 
 
-const FMInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, value, onChange }) => {
+const FMInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, onChange }) => {
     return (
         <div className="fm-input">
-            <label htmlFor={id}>{title}</label>
+            <label className='fm-input-label' htmlFor={id}>{title}</label>
             <input
+                className='fm-input-field'
                 type="text"
                 name={name}
                 id={id}
                 placeholder={placeholder}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
             />
         </div>
     );
 };
+
+export default FMInput;

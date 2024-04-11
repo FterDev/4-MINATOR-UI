@@ -1,0 +1,110 @@
+
+
+.fm-button
+{
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    min-height: 55px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    background-color: var(--neutral);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.fm-button-filled-primary
+{
+    background-color: var(--primary);   
+}
+
+.fm-button-filled-secondary
+{
+    background-color: var(--secondary);  
+}
+
+
+.fm-button-filled-warning
+{
+    background-color: var(--yellow); 
+}
+
+.fm-button-filled-danger
+{
+    background-color: var(--red); 
+}
+
+.fm-button-filled-success
+{
+    background-color: var(--green); 
+}
+
+.fm-button-outlined-primary
+{
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.fm-button-outlined-secondary
+{
+    background-color: transparent;
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
+}
+
+.fm-button-outlined-warning
+{
+    background-color: transparent;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+}
+
+.fm-button-outlined-danger
+{
+    background-color: transparent;
+    border: 1px solid var(--red);
+    color: var(--red);
+}
+
+.fm-button-outlined-success
+{
+    background-color: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+
+
+.fm-button-text-primary
+{
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.fm-button-text-secondary
+{
+    background-color: transparent;
+    color: var(--secondary);
+}
+
+.fm-button-text-warning
+{
+    background-color: transparent;
+    color: var(--yellow);
+}
+
+.fm-button-text-danger
+{
+    background-color: transparent;
+    color: var(--red);
+}
+
+.fm-button-text-success
+{
+    background-color: transparent;
+    color: var(--green);
+}
+

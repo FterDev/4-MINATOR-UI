@@ -1,9 +1,11 @@
 
+import React from 'react';
+import './fmbutton.css';
 
 interface FmButtonProps {
   text: string;
   type?: 'filled' | 'outlined' | 'text';
-  color?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning';
+  color?: 'primary' | 'secondary' | 'danger' | 'success';
   onClick?: () => void;
 }
 
@@ -11,7 +13,7 @@ interface FmButtonProps {
 const FmButton: React.FC<FmButtonProps> = ({ text, type = 'filled', color = 'primary', onClick }) => {
   return (
     <button
-      className={`fm-button fm-button--${type} fm-button--${color}`}
+      className={`fm-button fm-button-${type}-${color}`}
       onClick={onClick}
     >
       {text}

@@ -13,7 +13,7 @@ interface FmButtonProps {
 const FmButton: React.FC<FmButtonProps> = ({ text, type = 'filled', color = 'primary', onClick }) => {
   return (
     <button
-      className={`fm-button fm-button-${type}-${color}`}
+      className={`fm-button fm-button-${type}-${color} fm-button-${type}-hover`}
       onClick={onClick}
     >
       {text}

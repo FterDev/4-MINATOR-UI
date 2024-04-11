@@ -4,32 +4,61 @@
 {
     display: inline-block;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
-    min-height: 55px;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
     color: #fff;
     background-color: var(--neutral);
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    border: 0px solid transparent;
+    border-bottom: 3px solid transparent;
+    
 }
 
+
+
+
+.fm-button-filled-hover:hover
+{
+  
+    -webkit-box-shadow: 8px 10px 10px -9px rgba(0,0,0,0.48);
+    -moz-box-shadow: 8px 10px 10px -9px rgba(0,0,0,0.48);
+    box-shadow: 8px 10px 10px -9px rgba(0,0,0,0.48);
+}
+
+.fm-button-outlined-hover:hover
+{
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.fm-button-text-hover:hover
+{
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 .fm-button-filled-primary
 {
-    background-color: var(--primary);   
+    background-color: var(--primary);
 }
+
+.fm-button-filled-primary:hover
+{
+    border-bottom: 3px solid #866300;   
+}
+
 
 .fm-button-filled-secondary
 {
     background-color: var(--secondary);  
+
 }
 
-
-.fm-button-filled-warning
+.fm-button-filled-secondary:hover
 {
-    background-color: var(--yellow); 
+    border-bottom: 3px solid #420003;   
 }
 
 .fm-button-filled-danger
@@ -37,10 +66,22 @@
     background-color: var(--red); 
 }
 
+.fm-button-filled-danger:hover
+{
+    border-bottom: 3px solid #940007;  
+}
+
 .fm-button-filled-success
 {
     background-color: var(--green); 
 }
+
+.fm-button-filled-success:hover
+{
+    border-bottom: 3px solid #0a4f00;
+}
+
+
 
 .fm-button-outlined-primary
 {
@@ -56,12 +97,7 @@
     color: var(--secondary);
 }
 
-.fm-button-outlined-warning
-{
-    background-color: transparent;
-    border: 1px solid var(--yellow);
-    color: var(--yellow);
-}
+
 
 .fm-button-outlined-danger
 {
@@ -88,12 +124,6 @@
 {
     background-color: transparent;
     color: var(--secondary);
-}
-
-.fm-button-text-warning
-{
-    background-color: transparent;
-    color: var(--yellow);
 }
 
 .fm-button-text-danger

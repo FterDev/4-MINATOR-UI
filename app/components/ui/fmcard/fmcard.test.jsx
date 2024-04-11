@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import FmCard from "../../../app/components/ui/fmcard/fmcard";
+import FmCard from "./fmcard";
 
 describe("FmCard", () => {
   it("renders the title and subtitle correctly", () => {

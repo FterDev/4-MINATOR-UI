@@ -1,0 +1,66 @@
+
+.fm-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  
+}
+
+.fm-input-label {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 3px;
+  margin-left: 10px;
+}
+
+.fm-input-field {
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  height: 45px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--input-border);
+  font: 1em sans-serif;
+  transition: all 0.3s;
+}
+
+
+
+.fm-input-field-center
+{
+    text-align: center;
+}
+
+.fm-input-field-left
+{
+    text-align: left;
+}
+
+.fm-input-field-right
+{
+    text-align: right;
+}
+
+.fm-input-field:focus {
+  outline: none;
+  border: 1px solid #fff;
+}
+
+.fm-input-field-error {
+  border: 1px solid var(--danger);
+  
+}
+
+.fm-input-field-error:focus {
+    border: 1px solid var(--warning);
+}
+
+.fm-input-error{
+  display: block;
+  color: var(--warning);
+  font-size: 0.9em;
+  font-weight: 300;
+  margin-top: 5px;
+  margin-left: 10px;
+}

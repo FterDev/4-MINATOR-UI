@@ -11,7 +11,7 @@ interface FmCardProps {
 
 
 
-function FmCard({ title, subtitle, children }: FmCardProps) {
+const FmCard : React.FC<FmCardProps> = ({ title, subtitle, children }) => {
     return (
         <div className="card card-bg">
             <h2 className="card-title">{title}</h2>

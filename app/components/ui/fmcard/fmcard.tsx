@@ -11,11 +11,11 @@ interface FmCardProps {
 
 
 
-function FmCard({ title, subtitle, children }: FmCardProps) {
+const FmCard : React.FC<FmCardProps> = ({ title, subtitle, children }) => {
     return (
-        <div className="card card-bg">
-            <h2 className="card-title">{title}</h2>
-            <p className="card-subtitle">{subtitle}</p>
+        <div className="fm-card fm-card-bg">
+            <h2 className="fm-card-title">{title}</h2>
+            <p className="fm-card-subtitle">{subtitle}</p>
             <div>{children}</div>
         </div>
     );

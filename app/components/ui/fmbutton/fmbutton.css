@@ -5,14 +5,15 @@
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #fff;
-    background-color: var(--neutral);
-    cursor: pointer;
-    transition: all 0.3s;
     border: 0px solid transparent;
     border-bottom: 3px solid transparent;
+    color: #fff;
+    background-color: var(--neutral);
+    font-size: 16px;
+    font-weight: 500;
+    min-height: 55px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 
@@ -23,6 +24,7 @@
     -webkit-box-shadow: 8px 10px 10px -9px rgba(0,0,0,0.48);
     -moz-box-shadow: 8px 10px 10px -9px rgba(0,0,0,0.48);
     box-shadow: 8px 10px 10px -9px rgba(0,0,0,0.48);
+    filter: brightness(1.1);
 }
 
 .fm-button-outlined-hover:hover

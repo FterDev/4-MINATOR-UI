@@ -8,7 +8,7 @@ export default function Home() {
     <div>
       <FmCard title="Moaar Components!">
         <FMInput title="E-Mail" name="input" id="input" value="input" placeholder="joh@doe.com" />
-        <FMInput title="Password" name="input" id="input" value="input" placeholder="IloveCats!" isPassword={true} />
+        <FMInput title="Password" name="input" id="input" value="input" placeholder="IloveCats!" type="email" />
         <FmButton text="Buttons added!" color="primary" />
       </FmCard>
     </div>

@@ -6,7 +6,7 @@
     --red: #FE0031;
     --green: #86EA57;
     --background: #00060C;
-    --input-border: #2D4552;
+    --input-border: #8BACBC;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,7 +18,7 @@
     --red: #FE0031;
     --green: #6EC745;
     --background: #00060C;
-    --input-border: #2D4552;
+    --input-border: #8BACBC;
     --danger: #ff0000;
     --warning: #FFA500;
   }

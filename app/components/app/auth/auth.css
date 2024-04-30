@@ -13,3 +13,9 @@
     margin: 0 auto;
 }
 
+.auth-logo
+{
+    height: 150px;
+    width: auto;
+    opacity: 0.75;
+}

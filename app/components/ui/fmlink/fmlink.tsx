@@ -13,7 +13,7 @@ interface FmLinkProps {
 
 let FmLink: React.FC<FmLinkProps> = ({ text, href, className }) => {
     return (
-        <Link href={href} className={` ${className}`}>{text}</Link>
+        <Link href={href} className={`fm-link ${className}`}>{text}</Link>
     );
 };
 

@@ -1,9 +1,19 @@
 
 .fm-link
 {
-    color: var(--input-border);
+    font-family: 'Montserrat', sans-serif;
+    color: #8BACBC;
     text-decoration: none;
-    font-weight: 500;
+    font-size: 1.2em;
+    font-weight: 300;
     transition: all 0.3s;
 }
 
+
+
+.fm-link:hover
+{
+    
+    text-decoration: none;
+    filter: brightness(1.1);
+}

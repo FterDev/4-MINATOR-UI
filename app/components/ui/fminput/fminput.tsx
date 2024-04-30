@@ -16,7 +16,7 @@ interface FMInputProps {
 }
 
 
-const FMInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAlign='left', type='text' ,isErrored=false, errorText, onChange }) => {
+let FmInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAlign='left', type='text' ,isErrored=false, errorText, onChange }) => {
     return (
         <div className="fm-input">
             <label className='fm-input-label' htmlFor={id}>{title}</label>
@@ -33,4 +33,4 @@ const FMInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAli
     );
 };
 
-export default FMInput;
+export default FmInput;

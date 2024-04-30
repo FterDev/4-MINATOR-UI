@@ -12,7 +12,7 @@ interface AuthProps {
 
 let Auth : React.FC<AuthProps> = ({ children, text }) => {
     return (
-        <div className="auth">
+        <Flex justify='center' align='center' className='auth'>
             <FmCard className="auth-card">
                 <Flex justify='center'>
                     <Image src="/img/logo_transparent.png" alt="logo" width={0} height={0} sizes="100vw" className="auth-logo"/>
@@ -26,7 +26,7 @@ let Auth : React.FC<AuthProps> = ({ children, text }) => {
                     {children}
                 </Flex>
             </FmCard>
-        </div>
+        </Flex>
     );
 }
 

@@ -2,5 +2,12 @@
 
 .signin-button {
   margin-top: 20px;
+  margin-bottom: 40px;
   width: 300px;
+}
+
+.signin-link
+{
+    margin-top: 25px;
+    text-align: center;
 }

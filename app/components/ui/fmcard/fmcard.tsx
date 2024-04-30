@@ -6,14 +6,15 @@ import "./fmcard.css";
 interface FmCardProps {
     title?: string;
     subtitle?: string;
+    className?: string;
     children?: React.ReactNode;
 }
 
 
 
-const FmCard : React.FC<FmCardProps> = ({ title, subtitle, children }) => {
+let FmCard : React.FC<FmCardProps> = ({ title, subtitle, className, children }) => {
     return (
-        <div className="fm-card fm-card-bg">
+        <div className={"fm-card fm-card-bg" + className}>
             <h2 className="fm-card-title">{title}</h2>
             <p className="fm-card-subtitle">{subtitle}</p>
             <div>{children}</div>

@@ -10,7 +10,7 @@ interface AuthProps {
 let Auth : React.FC<AuthProps> = ({ children }) => {
     return (
         <div className="auth">
-            <FmCard>
+            <FmCard className={}>
                 
             </FmCard>
         </div>

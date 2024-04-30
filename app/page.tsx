@@ -1,16 +1,11 @@
 'use client';
-import FmButton from "./components/ui/fmbutton/fmbutton";
-import FmCard from "./components/ui/fmcard/fmcard";
-import FMInput from "./components/ui/fminput/fminput";
+import Auth from "./components/app/auth/auth";
 
 export default function Home() {
   return (
     <div>
-      <FmCard title="Moaar Components!">
-        <FMInput title="E-Mail" name="input" id="input" value="input" placeholder="joh@doe.com" type="email" />
-        <FMInput title="Password" name="input" id="input" value="input" placeholder="IloveCats!" type="password" />
-        <FmButton text="Buttons added!" color="primary" />
-      </FmCard>
+      <Auth>
+      </Auth>
     </div>
   );
 }

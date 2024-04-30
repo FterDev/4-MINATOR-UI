@@ -6,14 +6,15 @@ interface FmButtonProps {
   text: string;
   type?: 'filled' | 'outlined' | 'text';
   color?: 'primary' | 'secondary' | 'danger' | 'success';
+  className?: string;
   onClick?: () => void;
 }
 
 
-const FmButton: React.FC<FmButtonProps> = ({ text, type = 'filled', color = 'primary', onClick }) => {
+let FmButton: React.FC<FmButtonProps> = ({ text, type = 'filled', color = 'primary', className, onClick }) => {
   return (
     <button
-      className={`fm-button fm-button-${type}-${color} fm-button-${type}-hover`}
+      className={`fm-button fm-button-${type}-${color} fm-button-${type}-hover ${className}` }
       onClick={onClick}
     >
       {text}

@@ -22,7 +22,7 @@ let Auth : React.FC<AuthProps> = ({ children, text }) => {
                         {text}
                     </label>
                 </Flex>
-                <Flex justify='center' vertical>
+                <Flex justify='center' vertical className='auth-children'>
                     {children}
                 </Flex>
             </FmCard>

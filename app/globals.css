@@ -48,6 +48,20 @@ a {
   text-decoration: none;
 }
 
+
+.signin-button {
+  margin-top: 20px;
+  margin-bottom: 35px;
+  width: 300px;
+}
+
+.signin-link
+{
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

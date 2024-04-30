@@ -1,6 +1,6 @@
 'use client';
 
-import './page.css';
+
 import Auth from "@/app/components/app/auth/auth";
 import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";

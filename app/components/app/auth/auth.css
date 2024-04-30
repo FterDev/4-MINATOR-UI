@@ -18,3 +18,15 @@
     width: auto;
     opacity: 0.75;
 }
+
+.auth-text
+{
+    font-size: 1.25em;
+    font-weight: 300;
+    text-align: center;
+}
+
+.auth-text-container
+{
+    margin-top: 20px;
+}

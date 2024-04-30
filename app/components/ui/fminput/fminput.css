@@ -7,7 +7,7 @@
 
 .fm-input-label {
   display: block;
-  font-size: 1em;
+  font-size: 1.25em;
   margin-bottom: 3px;
   margin-left: 10px;
 }
@@ -16,11 +16,11 @@
   display: block;
   width: 100%;
   background-color: transparent;
-  min-height: 55px;
+  min-height: 60px;
   padding: 0 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid var(--input-border);
-  font: 1em sans-serif;
+  font: 1.2em sans-serif;
   transition: all 0.3s;
 }
 

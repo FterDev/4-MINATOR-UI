@@ -10,8 +10,8 @@ interface AuthProps {
 let Auth : React.FC<AuthProps> = ({ children }) => {
     return (
         <div className="auth">
-            <FmCard className={}>
-                
+            <FmCard className="auth-card">
+              
             </FmCard>
         </div>
     );

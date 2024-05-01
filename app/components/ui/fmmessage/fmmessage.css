@@ -26,3 +26,8 @@
 {
     color: var(--red)
 }
+
+.warning
+{
+    color: var(--yellow)
+}

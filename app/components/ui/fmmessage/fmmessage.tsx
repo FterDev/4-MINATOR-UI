@@ -5,7 +5,7 @@ import "./fmmessage.css";
 
 import { Flex } from "antd";
 import FmCard from "../fmcard/fmcard";
-import { CheckCircleOutline } from "@mui/icons-material";
+import { CancelOutlined, CheckCircleOutline, ErrorOutlineOutlined, InfoOutlined } from "@mui/icons-material";
 
 
 interface FmMessageProps {
@@ -21,6 +21,9 @@ let FmMessage: React.FC<FmMessageProps> = ({ type, message, children }) => {
             <FmCard className="fm-message">
                 <Flex justify="center">
                     {type === 'success' && <CheckCircleOutline className="fm-message-icon success" />}
+                    {type === 'error' && <CancelOutlined className="fm-message-icon error" />}
+                    {type === 'warning' && <ErrorOutlineOutlined className="fm-message-icon warning" />}
+                    {type === 'info' && <InfoOutlined className="fm-message-icon" />}
                 </Flex>
             </FmCard>
         </Flex>

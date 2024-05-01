@@ -1,0 +1,13 @@
+
+
+.fm-message-container
+{
+    width: 100%;
+    height: 100vh;
+}
+
+.fm-message
+{
+    max-width: 600px;
+    min-width: 300px;
+}

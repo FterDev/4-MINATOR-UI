@@ -11,6 +11,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.15.15",
     "antd": "^5.16.5",
     "next": "14.1.4",
     "react": "^18",

@@ -1,7 +1,7 @@
 import React from 'react';
 import './auth.css';
 import FmCard from '../../ui/fmcard/fmcard';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import Image from 'next/image';
 
 

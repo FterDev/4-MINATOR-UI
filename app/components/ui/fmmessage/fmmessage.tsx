@@ -25,6 +25,14 @@ let FmMessage: React.FC<FmMessageProps> = ({ type, message, children }) => {
                     {type === 'warning' && <ErrorOutlineOutlined className="fm-message-icon warning" />}
                     {type === 'info' && <InfoOutlined className="fm-message-icon" />}
                 </Flex>
+                <Flex justify="center" className="fm-message-content">
+                    <label className="fm-message-text">
+                        {message}
+                    </label>
+                </Flex>
+                <Flex justify="center" className="fm-message-content">
+                    {children}
+                </Flex>
             </FmCard>
         </Flex>
     );

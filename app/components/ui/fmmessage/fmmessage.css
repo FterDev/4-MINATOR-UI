@@ -31,3 +31,15 @@
 {
     color: var(--yellow)
 }
+
+.fm-message-content
+{
+    margin-top: 20px;
+    
+}
+
+.fm-message-text
+{
+    font-size: 1.5em;
+    padding: 20px 10px;
+}

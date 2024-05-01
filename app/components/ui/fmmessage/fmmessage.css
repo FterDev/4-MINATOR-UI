@@ -11,3 +11,18 @@
     max-width: 600px;
     min-width: 300px;
 }
+
+.fm-message-icon
+{
+    font-size: 7.5em;
+}
+
+.success
+{
+    color: var(--green)
+}
+
+.error
+{
+    color: var(--red)
+}

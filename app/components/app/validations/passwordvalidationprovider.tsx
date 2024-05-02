@@ -2,16 +2,15 @@ import { z } from "zod";
 
 
 
-interface PasswordValidatorCriteria {
+export interface PasswordValidatorCriteria {
     min: number;
     max: number;
     hasNumber: boolean;
     hasSpecial: boolean;
-    hasUpperCase: boolean;
-    hasLowerCase: boolean;
+    hasUpperLowerCase: boolean;
 }
 
-interface PasswordValidationResponse {
+export interface PasswordValidationResponse {
     error : boolean;
     lengthError : boolean;
     hasNumberError : boolean;
@@ -70,24 +69,11 @@ export default function PasswordValidationProvider(password:string, criteria: Pa
             }
         }
 
-        if(criteria.hasUpperCase)
+        if(criteria.hasUpperLowerCase)
         {
             try
             {
-                z.string().regex(/[A-ZÄÖÜ]/).parse(password);
-            }
-            catch(error)
-            {
-                hasUpperLowerCaseError = true;
-                error = true;
-            }
-        }
-
-        if(criteria.hasLowerCase)
-        {
-            try
-            {
-                z.string().regex(/[a-zäöüß]/).parse(password);
+                z.string().regex(/[a-zäöüßA-ZÄÖÜ]/).parse(password);
             }
             catch(error)
             {

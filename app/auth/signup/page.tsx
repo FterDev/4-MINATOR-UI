@@ -1,9 +1,11 @@
 'use client'
 
 import Auth from "@/app/components/app/auth/auth";
+import { PasswordValidationResponse, PasswordValidatorCriteria } from "@/app/components/app/validations/passwordvalidationprovider";
 import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
+import FmPasswordValidator from "@/app/components/ui/fmpasswordvalidator/fmpasswordvalidator";
 import { LoadingOutlined } from "@ant-design/icons";
 
 
@@ -25,6 +27,22 @@ export default function SignUp()
     const nickname = document.querySelector<HTMLInputElement>("#nickname");
     const email = document.querySelector<HTMLInputElement>("#email");
 
+
+    const pwCriteria:PasswordValidatorCriteria = {
+        min: 8,
+        max: 32,
+        hasNumber: true,
+        hasSpecial: true,
+        hasUpperLowerCase: true
+    };
+
+    const pwErrors:PasswordValidationResponse = {
+        error: false,
+        lengthError: false,
+        hasNumberError: false,
+        hasSpecialError: false,
+        hasUpperLowerCaseError: false
+    };
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>)
     {
@@ -102,6 +120,7 @@ export default function SignUp()
                 <FmInput id="nickname" name="nickname" title="Nickname" value="" placeholder="FluffyUnicorn" onBlur={validateNickname} isErrored={nicknameError!=null} errorText={nicknameError} type="text" textAlign="center" />
                 <FmInput id="email" name="email" title="E-Mail" value="" placeholder="fluffy@unicorn.com" onBlur={validateEmail} isErrored={emailError!=null} errorText={emailError} type="email" textAlign="center" />
                 <FmInput id="password" name="password" title="Password" value="" placeholder="●●●●●●●" type="password" textAlign="center" />
+                <FmPasswordValidator criteria={pwCriteria} errors={pwErrors} />
                 <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" isDisabled={loading} submmit/>
                 <FmLink text="Back to Sign In" href="/auth/signin" className="signin-link"/>
             </Auth>

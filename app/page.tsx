@@ -7,7 +7,7 @@ import FmMessage from "./components/ui/fmmessage/fmmessage";
 export default function Home() {
   return (
     <div>
-      <FmLoading/>
+     
     </div>
   );
 }

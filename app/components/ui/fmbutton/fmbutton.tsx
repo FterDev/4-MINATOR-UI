@@ -3,7 +3,7 @@ import React from 'react';
 import './fmbutton.css';
 
 interface FmButtonProps {
-  text: string;
+  text: React.ReactNode;
 
   type?: 'filled' | 'outlined' | 'text';
   color?: 'primary' | 'secondary' | 'danger' | 'success';

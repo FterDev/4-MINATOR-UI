@@ -89,7 +89,7 @@ export default class PasswordValidationProvider {
         {
             try
             {
-                z.string().regex(/[a-zäöüßA-ZÄÖÜ]/).parse(password);
+                z.string().regex(/[A-ZÄÖÜ]/).parse(password);
             }
             catch(error)
             {
@@ -97,6 +97,20 @@ export default class PasswordValidationProvider {
                 this.error = true;
             }
         }
+
+
+        if(this.criteria.hasUpperLowerCase)
+            {
+                try
+                {
+                    z.string().regex(/[a-zäöüß]/).parse(password);
+                }
+                catch(error)
+                {
+                    this.hasUpperLowerCaseError = true;
+                    this.error = true;
+                }
+            }
 
         return {
             error: this.error,

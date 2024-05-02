@@ -21,29 +21,45 @@ export interface PasswordValidationResponse {
 
 
 
-export default function PasswordValidationProvider(password:string, criteria: PasswordValidatorCriteria) {
+export default class PasswordValidationProvider {
     
-    let error = false;
-    let lengthError = false;
-    let hasNumberError = false;
-    let hasSpecialError = false;
-    let hasUpperLowerCaseError = false;
-    
+    error = false;
+    lengthError = false;
+    hasNumberError = false;
+    hasSpecialError = false;
+    hasUpperLowerCaseError = false;
 
-    function validatePassword() {
+    criteria: PasswordValidatorCriteria = {
+        min: 8,
+        max: 32,
+        hasNumber: true,
+        hasSpecial: true,
+        hasUpperLowerCase: true
+    };
+    
+    constructor(criteria: PasswordValidatorCriteria) {
+        this.criteria = criteria;
+    }
+
+    validatePassword(password:string | undefined | null) {
+
+        if(password === null || password === undefined)
+        {
+            password = "";
+        }
                 
-        if(password.length < criteria.min)
+        if(password.length < this.criteria.min)
         {
-            lengthError = true;
-            error = true;
+            this.lengthError = true;
+            this.error = true;
         }
-        if(password.length > criteria.max)
+        if(password.length > this.criteria.max)
         {
-            lengthError = true;
-            error = true;
+            this.lengthError = true;
+            this.error = true;
         }
 
-        if(criteria.hasNumber)
+        if(this.criteria.hasNumber)
         {
             try
             {
@@ -51,12 +67,12 @@ export default function PasswordValidationProvider(password:string, criteria: Pa
             }
             catch(error)
             {
-                hasNumberError = true;
-                error = true;
+                this.hasNumberError = true;
+                this.error = true;
             }
         }
 
-        if(criteria.hasSpecial)
+        if(this.criteria.hasSpecial)
         {
             try
             {
@@ -64,12 +80,12 @@ export default function PasswordValidationProvider(password:string, criteria: Pa
             }
             catch(error)
             {
-                hasSpecialError = true;
-                error = true;
+                this.hasSpecialError = true;
+                this.error = true;
             }
         }
 
-        if(criteria.hasUpperLowerCase)
+        if(this.criteria.hasUpperLowerCase)
         {
             try
             {
@@ -77,10 +93,18 @@ export default function PasswordValidationProvider(password:string, criteria: Pa
             }
             catch(error)
             {
-                hasUpperLowerCaseError = true;
-                error = true;
+                this.hasUpperLowerCaseError = true;
+                this.error = true;
             }
         }
+
+        return {
+            error: this.error,
+            lengthError: this.lengthError,
+            hasNumberError: this.hasNumberError,
+            hasSpecialError: this.hasSpecialError,
+            hasUpperLowerCaseError: this.hasUpperLowerCaseError
+        };
     }
     
 }

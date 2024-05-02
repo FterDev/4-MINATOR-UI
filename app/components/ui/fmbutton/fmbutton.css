@@ -27,6 +27,8 @@
     filter: brightness(1.1);
 }
 
+
+
 .fm-button-outlined-hover:hover
 {
     color: #fff;
@@ -43,6 +45,13 @@
     background-color: var(--primary);
     border-bottom: 3px solid #866300;   
 }
+
+.fm-button-filled-primary:disabled
+{
+    background-color: #7d6013;
+    cursor: wait;
+}
+
 
 
 

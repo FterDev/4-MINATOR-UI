@@ -25,6 +25,7 @@ export default function SignUp()
         {
             setLoading(true)
             event.preventDefault();
+            console.log("Sign Up");
             
 
 
@@ -50,7 +51,7 @@ export default function SignUp()
                 <FmInput id="nickname" name="nickname" title="Nickname" value="" placeholder="FluffyUnicorn" type="text" textAlign="center" />
                 <FmInput id="email" name="email" title="E-Mail" value="" placeholder="fluffy@unicorn.com" type="email" textAlign="center" />
                 <FmInput id="password" name="password" title="Password" value="" placeholder="●●●●●●●" type="password" textAlign="center" />
-                <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" submmit/>
+                <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" isDisabled={loading} submmit/>
                 <FmLink text="Back to Sign In" href="/auth/signin" className="signin-link"/>
             </Auth>
         </form>

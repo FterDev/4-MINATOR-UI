@@ -11,12 +11,13 @@ interface FMInputProps {
     textAlign?: 'center' | 'left' | 'right';
     type?: 'text' | 'password' | 'email';
     isErrored?: boolean;
-    errorText?: string;
+    errorText?: string | null;
     onChange?: (value: string) => void;
+    onBlur?: (value: string) => void;
 }
 
 
-let FmInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAlign='left', type='text' ,isErrored=false, errorText, onChange }) => {
+let FmInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAlign='left', type='text' ,isErrored=false, errorText, onChange, onBlur }) => {
     return (
         <div className="fm-input">
             <label className='fm-input-label' htmlFor={id}>{title}</label>
@@ -27,6 +28,7 @@ let FmInput: React.FC<FMInputProps> = ({ title, name, placeholder, id, textAlign
                 id={id}
                 placeholder={placeholder}
                 onChange={(e) => onChange && onChange(e.target.value)}
+                onBlur={(e) => onBlur && onBlur(e.target.value)}
             />
             <label className='fm-input-error' htmlFor={id}>{errorText}</label>
         </div>

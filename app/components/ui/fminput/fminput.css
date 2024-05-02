@@ -57,7 +57,7 @@
 
 .fm-input-error{
   display: block;
-  color: var(--warning);
+  color: var(--danger);
   font-size: 0.9em;
   font-weight: 300;
   margin-top: 5px;

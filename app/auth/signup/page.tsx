@@ -8,7 +8,9 @@ import ValidationErrorResponse from "@/app/components/app/validations/validation
 import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
+import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
 import FmPasswordValidator from "@/app/components/ui/fmpasswordvalidator/fmpasswordvalidator";
+import Auth0Service, { SignUpProps } from "@/app/services/auth0service";
 import { LoadingOutlined } from "@ant-design/icons";
 
 
@@ -28,6 +30,7 @@ export default function SignUp()
 
     
     const [error, setError] = useState<Boolean>(false);
+    const [success, setSuccess] = useState<Boolean>(false);
     const [nicknameError , setNicknameError] = useState<ValidationErrorResponse>(
         {
             errorText: null,
@@ -77,6 +80,7 @@ export default function SignUp()
     const pwProvider = new PasswordValidationProvider(pwCriteria);
     const emailProvider = new EmailValidationProvider();
     const nicknameProvider = new NicknameValidationProvider();
+    const auth0provider = new Auth0Service();
 
     function validateEmail()
     {
@@ -102,6 +106,7 @@ export default function SignUp()
 
     function checkAllinputs()
     {
+        setError(false);
         setNicknameError(nicknameProvider.validateNickname(nickname));
         setEmailError(emailProvider.validateEmail(email));
         setPasswordErrors(pwProvider.validatePassword(password));
@@ -125,24 +130,36 @@ export default function SignUp()
             return;
         }
         
-        try
-        {
+      
             setLoading(true);
-            formData = {
+            let data:SignUpProps = {
                 nickname: nickname,
                 email: email,
                 password: password
             }
-            console.log(formData);
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
-        finally
-        {
-            setLoading(false);
-        }
+            
+            await auth0provider.signUp(data).then((result) => {
+                
+                if (result.statusCode === 400)
+                {
+                    setLoading(false);
+                    setError(true);
+                    setEmailError({errorText: "E-Mail or Nickname already in use!", isErrored: true});
+                    setNicknameError({errorText: "E-Mail or Nickname already in use!", isErrored: true});
+                    return;
+                }
+                
+                setEmail("");
+                setNickname("");
+                setPassword("");
+                setLoading(false);
+                setSuccess(true);
+                return;
+
+            });
+            
+
+        
        
     }
 
@@ -151,16 +168,21 @@ export default function SignUp()
  
 
     return (
-        
-        <form onSubmit={handleSubmit}>
-            <Auth text="Please enter the required information to create an account.">
-                <FmInput id="nickname" name="nickname" title="Nickname" value={nickname} placeholder="FluffyUnicorn" onBlur={validateNickname} onChange={(e) => setNickname(e)} isErrored={nicknameError.isErrored} errorText={nicknameError.errorText} type="text" textAlign="center" />
-                <FmInput id="email" name="email" title="E-Mail" value={email} placeholder="fluffy@unicorn.com" onBlur={validateEmail} onChange={(e) => setEmail(e)} isErrored={emailError.isErrored} errorText={emailError.errorText} type="email" textAlign="center" />
-                <FmInput id="password" name="password" title="Password" value={password} placeholder="●●●●●●●" onBlur={showPasswordValidator} onChange={(e) => validatePassword(e)} isErrored={passwordErrors.error} type="password" textAlign="center" />
-                {passwordValidatorDisplay ? <FmPasswordValidator criteria={pwCriteria} errors={passwordErrors} /> : null}
-                <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" isDisabled={loading} submmit/>
+       
+        success ? 
+            <FmMessage type="success" message="You have successfully signed up! Please confirm your e-mail before signing in.">
                 <FmLink text="Back to Sign In" href="/auth/signin" className="signin-link"/>
-            </Auth>
-        </form>
+            </FmMessage>
+        :
+            <form onSubmit={handleSubmit}>
+                <Auth text="Please enter the required information to create an account.">
+                    <FmInput id="nickname" name="nickname" title="Nickname" value={nickname} placeholder="FluffyUnicorn" onBlur={validateNickname} onChange={(e) => setNickname(e)} isErrored={nicknameError.isErrored} errorText={nicknameError.errorText} type="text" textAlign="center" />
+                    <FmInput id="email" name="email" title="E-Mail" value={email} placeholder="fluffy@unicorn.com" onBlur={validateEmail} onChange={(e) => setEmail(e)} isErrored={emailError.isErrored} errorText={emailError.errorText} type="email" textAlign="center" />
+                    <FmInput id="password" name="password" title="Password" value={password} placeholder="●●●●●●●" onBlur={showPasswordValidator} onChange={(e) => validatePassword(e)} isErrored={passwordErrors.error} type="password" textAlign="center" />
+                    {passwordValidatorDisplay ? <FmPasswordValidator criteria={pwCriteria} errors={passwordErrors} /> : null}
+                    <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" isDisabled={loading} submmit/>
+                    <FmLink text="Back to Sign In" href="/auth/signin" className="signin-link"/>
+                </Auth>
+            </form>
     );
 }

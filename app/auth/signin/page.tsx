@@ -60,12 +60,17 @@ export default function SignIn()
         if (!error) {
             setLoading(true);
             await auth0service.signIn({email: email, password: password}).then((response) => {
-                console.log(response);
                 setLoading(false);
                 if(response.error == "invalid_grant")
                 {
                     setEmailError({errorText: "Invalid email or password", isErrored: true});
                     setPasswordError({errorText: "", isErrored: true});
+                    setLoading(false);
+                }
+
+                if(response.error == "access_denied")
+                {
+                    setEmailError({errorText: "Please verify your e-mail first!", isErrored: true});
                     setLoading(false);
                 }
             });

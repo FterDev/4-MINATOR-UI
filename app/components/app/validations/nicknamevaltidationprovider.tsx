@@ -2,7 +2,7 @@ import { z } from "zod";
 import ValidationErrorResponse from "./validationerrorresponse";
 
 
-export default class NciknameValidationProvider {
+export default class NicknameValidationProvider {
     
 
     validateNickname(nickname:string | undefined):ValidationErrorResponse
@@ -26,3 +26,5 @@ export default class NciknameValidationProvider {
     }
 
 }
+
+

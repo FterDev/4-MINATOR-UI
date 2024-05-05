@@ -39,7 +39,6 @@ export default class Auth0Service
     {
         let body = {
             client_id: auth0client,
-            //email: props.email,
             username: props.email,
             password: props.password,
             connection: 'Email-Password-Authentication',

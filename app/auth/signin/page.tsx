@@ -64,7 +64,6 @@ export default function SignIn()
                 setLoading(false);
                 if(response.error == "invalid_grant")
                 {
-                    
                     setEmailError({errorText: "Invalid email or password", isErrored: true});
                     setPasswordError({errorText: "", isErrored: true});
                     setLoading(false);

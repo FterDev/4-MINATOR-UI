@@ -12,6 +12,12 @@ import { LoadingOutlined } from "@ant-design/icons";
 import React, { FormEvent, useState } from "react";
 import { z } from "zod";
 
+interface SignUpForm {
+    nickname: string;
+    email: string;
+    password: string;
+}
+
 
 
 export default function SignUp()
@@ -39,6 +45,12 @@ export default function SignUp()
     const nickname = document.querySelector<HTMLInputElement>("#nickname");
     const email = document.querySelector<HTMLInputElement>("#email");
     const password = document.querySelector<HTMLInputElement>("#password");
+
+    let formData:SignUpForm = {
+        nickname: "",
+        email: "",
+        password: ""
+    }
 
 
     const pwCriteria:PasswordValidatorCriteria = {
@@ -126,7 +138,6 @@ export default function SignUp()
 
     function validatePassword()
     {
-        console.log("Validating password");
         setPasswordErrors(pwProvider.validatePassword(password?.value));
     }
 

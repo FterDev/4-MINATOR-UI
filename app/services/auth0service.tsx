@@ -31,8 +31,22 @@ export default class Auth0Service
             connection: 'Username-Password-Authentication',
         }
 
-        let result = await this.sendRequest('dbconnections/signup', 'POST', body);
-        return result;
+        let response  = await this.sendRequest('dbconnections/signup', 'POST', body);
+        return this.parseResponse(response, 'json');
+    }
+
+    public async resetPassword(email:string)
+    {
+        let body = {
+            client_id: auth0client,
+            email: email,
+            connection: 'Username-Password-Authentication',
+            organization: ''
+        }
+
+        let response = await this.sendRequest('dbconnections/change_password', 'POST', body);
+        return this.parseResponse(response, 'text');
+       
     }
 
     private async sendRequest(route:string, method:string, body:any)
@@ -44,9 +58,22 @@ export default class Auth0Service
             },
             body: JSON.stringify(body)
         });
-        const data = await response.json();
-        console.log(data);
-        return data;
+        
+        return response;
+    }
+
+    private async parseResponse(response:Response, awaitedData:string)
+    {
+        if(awaitedData === 'text')
+        {
+            return await response.text();
+        }
+        if(awaitedData === 'json')
+        {
+            return await response.json();
+        }
+        
+        return Error('No data type specified');
     }
 }
 

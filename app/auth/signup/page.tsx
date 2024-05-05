@@ -12,18 +12,14 @@ import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
 import FmPasswordValidator from "@/app/components/ui/fmpasswordvalidator/fmpasswordvalidator";
 import Auth0Service, { SignUpProps } from "@/app/services/auth0service";
 import { LoadingOutlined } from "@ant-design/icons";
-
-
 import React, { FormEvent, useState } from "react";
-import { set, z } from "zod";
+
 
 interface SignUpForm {
     nickname: string;
     email: string;
     password: string;
 }
-
-
 
 export default function SignUp()
 {
@@ -163,10 +159,6 @@ export default function SignUp()
        
     }
 
-    
-
- 
-
     return (
        
         success ? 
@@ -186,3 +178,4 @@ export default function SignUp()
             </form>
     );
 }
+

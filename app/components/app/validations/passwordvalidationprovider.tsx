@@ -38,9 +38,14 @@ export default class PasswordValidationProvider {
         hasUpperLowerCase: true
     };
     
-    constructor(criteria: PasswordValidatorCriteria) {
-        this.criteria = criteria;
+    constructor(criteria: PasswordValidatorCriteria | undefined | null) {
+        if(criteria !== null && criteria !== undefined)
+        {
+            this.criteria = criteria;
+        }
     }
+
+    
 
     validatePassword(password:string | undefined | null) {
 

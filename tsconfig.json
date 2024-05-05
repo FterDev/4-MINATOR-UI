@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/ui/fmbutton/fmbutton.test.jsx", "app/components/ui/fminput/fminput.tests.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/ui/fmbutton/fmbutton.test.jsx", "app/components/ui/fminput/fminput.tests.jsx", "app/components/app/validations/emailvalidationprovider.test.jsx", "app/components/app/validations/passwordvalidationprovider.test.jsx"],
   "exclude": ["node_modules"]
 }

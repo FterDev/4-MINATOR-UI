@@ -6,7 +6,7 @@ import ValidationErrorResponse from "./validationerrorresponse";
 
 export default class EmailValidationProvider
 {
-    validateEmail(email:string):ValidationErrorResponse
+    validateEmail(email:string | undefined):ValidationErrorResponse
     {
         if(email === "" || email == null)
         {

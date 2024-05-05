@@ -1,7 +1,9 @@
 'use client'
 
 import Auth from "@/app/components/app/auth/auth";
+import EmailValidationProvider from "@/app/components/app/validations/emailvalidationprovider";
 import PasswordValidationProvider, { PasswordValidationResponse, PasswordValidatorCriteria } from "@/app/components/app/validations/passwordvalidationprovider";
+import ValidationErrorResponse from "@/app/components/app/validations/validationerrorresponse";
 import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
@@ -26,7 +28,14 @@ export default function SignUp()
     
     const [error, setError] = useState<string | null>(null);
     const [nicknameError , setNicknameError] = useState<string | null>(null);
-    const [emailError , setEmailError] = useState<string | null>(null);
+    let [emailError , setEmailError] = useState<ValidationErrorResponse>(
+        {
+            errorText: null,
+            isErrored: false
+        }
+    );
+
+
     const [passwordErrors , setPasswordErrors] = useState<PasswordValidationResponse>(
         {
             error: false,
@@ -36,6 +45,8 @@ export default function SignUp()
             hasUpperLowerCaseError: true
         }
     );
+
+    
     
 
     const [passwordValidatorDisplay , setPasswordValidatorDisplay] = useState<boolean>(false);
@@ -64,6 +75,7 @@ export default function SignUp()
 
 
     const pwProvider = new PasswordValidationProvider(pwCriteria);
+    const emailProvider = new EmailValidationProvider();
 
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>)
@@ -89,7 +101,7 @@ export default function SignUp()
 
     function validateEmail()
     {
-        
+        setEmailError(emailProvider.validateEmail(email?.value));
     }
 
 
@@ -135,7 +147,7 @@ export default function SignUp()
         <form onSubmit={handleSubmit}>
             <Auth text="Please enter the required information to create an account.">
                 <FmInput id="nickname" name="nickname" title="Nickname" value="" placeholder="FluffyUnicorn" onBlur={validateNickname} isErrored={nicknameError!=null} errorText={nicknameError} type="text" textAlign="center" />
-                <FmInput id="email" name="email" title="E-Mail" value="" placeholder="fluffy@unicorn.com" onBlur={validateEmail} isErrored={emailError!=null} errorText={emailError} type="email" textAlign="center" />
+                <FmInput id="email" name="email" title="E-Mail" value="" placeholder="fluffy@unicorn.com" onBlur={validateEmail} isErrored={emailError.isErrored} errorText={emailError.errorText} type="email" textAlign="center" />
                 <FmInput id="password" name="password" title="Password" value="" placeholder="●●●●●●●" onBlur={showPasswordValidator} onChange={validatePassword} isErrored={passwordErrors.error} type="password" textAlign="center" />
                 {passwordValidatorDisplay ? <FmPasswordValidator criteria={pwCriteria} errors={passwordErrors} /> : null}
                 <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" isDisabled={loading} submmit/>

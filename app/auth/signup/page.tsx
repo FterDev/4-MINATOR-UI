@@ -74,34 +74,9 @@ export default function SignUp()
         hasUpperLowerCase: true
     };
 
-
-
     const pwProvider = new PasswordValidationProvider(pwCriteria);
     const emailProvider = new EmailValidationProvider();
     const nicknameProvider = new NicknameValidationProvider();
-
-
-
-    async function handleSubmit(event: FormEvent<HTMLFormElement>)
-    {
-        try
-        {
-            setLoading(true)
-            event.preventDefault();
-            console.log("Sign Up");
-            
-
-
-        }
-        catch(error)
-        {
-            
-        }
-        finally
-        {
-          
-        }
-    }
 
     function validateEmail()
     {
@@ -125,8 +100,37 @@ export default function SignUp()
     }
 
 
+    function checkAllinputs()
+    {
+        setNicknameError(nicknameProvider.validateNickname(nickname));
+        setEmailError(emailProvider.validateEmail(email));
+        setPasswordErrors(pwProvider.validatePassword(password));
+
+        if(nicknameError.isErrored || emailError.isErrored || passwordErrors.error)
+        {
+            setError(true);
+            showPasswordValidator();
+        }
+
+    }
+
+    async function handleSubmit(event: FormEvent<HTMLFormElement>)
+    {
+        event.preventDefault();
+        checkAllinputs();
+
+        if(error)
+        {
+            setLoading(false);
+            return;
+        }
+        
+       
+    }
 
     
+
+ 
 
     return (
         

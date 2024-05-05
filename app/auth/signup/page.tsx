@@ -89,22 +89,7 @@ export default function SignUp()
 
     function validateEmail()
     {
-        if(email?.value === "" || email?.value == null)
-        {
-            setEmailError("Email is required!");
-        }
-        else
-        {
-            try
-            {
-                z.string().email().parse(email?.value);
-                setEmailError(null);
-            }
-            catch(error)
-            {
-                setEmailError("Invalid e-mail address!");
-            }
-        }
+        
     }
 
 

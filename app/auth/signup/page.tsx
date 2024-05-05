@@ -125,6 +125,24 @@ export default function SignUp()
             return;
         }
         
+        try
+        {
+            setLoading(true);
+            formData = {
+                nickname: nickname,
+                email: email,
+                password: password
+            }
+            console.log(formData);
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
+        finally
+        {
+            setLoading(false);
+        }
        
     }
 

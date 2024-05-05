@@ -9,7 +9,9 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import Auth0Service from "@/app/services/auth0service";
+import { LoadingOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { set } from "zod";
 
 
 
@@ -39,10 +41,33 @@ export default function SignIn()
     const passwordValidation = new PasswordValidationProvider(null);
     const auth0service = new Auth0Service();
 
+    function checkAllInputs() {
+        setEmailError(emailValidation.validateEmail(email));
+        setPasswordError(passwordValidation.validateOnlyEmpty(password));
+
+        if (emailError.isErrored || passwordError.isErrored) {
+            setError(true);
+        } else {
+            setError(false);
+        }
+    }
 
     async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
     
+        event.preventDefault();
+        checkAllInputs();
 
+        if (!error) {
+            setLoading(true);
+            await auth0service.signIn({email: email, password: password}).then((response) => {
+                console.log(response);
+                setLoading(false);
+            }).catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
+            
+        }
     
     }
 
@@ -51,7 +76,7 @@ export default function SignIn()
             <Auth text="Please login to start playing.">
                 <FmInput id="email" name="email" title="E-Mail" value={email} onBlur={(e) => setEmailError(emailValidation.validateEmail(e))} onChange={(e) => setEmail(e)} isErrored={emailError.isErrored} errorText={emailError.errorText} placeholder="fluffy@unicorn.com" type="email" textAlign="center" />
                 <FmInput id="password" name="password" title="Password" value={password} onBlur={(e) => setPasswordError(passwordValidation.validateOnlyEmpty(e))} onChange={(e) => setPassword(e)} isErrored={passwordError.isErrored} errorText={passwordError.errorText} placeholder="●●●●●●●" type="password" textAlign="center" />
-                <FmButton text="Sign In" className="signin-button" submmit />
+                <FmButton text={loading ? <LoadingOutlined /> : "Sign in"} isDisabled={loading} className="signin-button" submmit />
                 <FmLink text="Forgot your password?" href="/auth/forgot" className="signin-link"/>
                 <FmLink text="No account? Create one!" href="/auth/signup" className="signin-link"/>
             </Auth>

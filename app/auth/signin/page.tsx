@@ -62,9 +62,13 @@ export default function SignIn()
             await auth0service.signIn({email: email, password: password}).then((response) => {
                 console.log(response);
                 setLoading(false);
-            }).catch((error) => {
-                console.log(error);
-                setLoading(false);
+                if(response.error == "invalid_grant")
+                {
+                    
+                    setEmailError({errorText: "Invalid email or password", isErrored: true});
+                    setPasswordError({errorText: "", isErrored: true});
+                    setLoading(false);
+                }
             });
             
         }

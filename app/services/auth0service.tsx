@@ -35,6 +35,20 @@ export default class Auth0Service
         return this.parseResponse(response, 'json');
     }
 
+    public async signIn(props:SignInProps)
+    {
+        let body = {
+            client_id: auth0client,
+            email: props.email,
+            password: props.password,
+            connection: 'Username-Password-Authentication',
+            organization: ''
+        }
+
+        let response = await this.sendRequest('oauth/token', 'POST', body);
+        return this.parseResponse(response, 'json');
+    }
+
     public async resetPassword(email:string)
     {
         let body = {

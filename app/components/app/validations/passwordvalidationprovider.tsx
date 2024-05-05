@@ -1,3 +1,4 @@
+import { isErrored } from "stream";
 import { z } from "zod";
 
 
@@ -119,6 +120,24 @@ export default class PasswordValidationProvider {
             hasSpecialError: this.hasSpecialError,
             hasUpperLowerCaseError: this.hasUpperLowerCaseError
         };
+    }
+
+
+    validateOnlyEmpty(password:string | undefined | null) 
+    {
+        if(password === null || password === "" || password === undefined)
+        {
+            return {
+                isErrored: true,
+                errorText: "Password is empty!"
+            }
+        }
+
+
+        return {
+            isErrored: false,
+            errorText: null
+        }
     }
     
 }

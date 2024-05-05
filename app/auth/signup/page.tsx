@@ -27,7 +27,7 @@ export default function SignUp()
 {
 
     
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<Boolean>(false);
     const [nicknameError , setNicknameError] = useState<ValidationErrorResponse>(
         {
             errorText: null,
@@ -35,15 +35,12 @@ export default function SignUp()
         }
     );
 
-
     const [emailError , setEmailError] = useState<ValidationErrorResponse>(
         {
             errorText: null,
             isErrored: false
         }
     );
-
-
     const [passwordErrors , setPasswordErrors] = useState<PasswordValidationResponse>(
         {
             error: false,
@@ -54,16 +51,13 @@ export default function SignUp()
         }
     );
 
-    
-    
-
     const [passwordValidatorDisplay , setPasswordValidatorDisplay] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const delay = new Promise(res => setTimeout(res, 3000));
+    
 
-    const nickname = document.querySelector<HTMLInputElement>("#nickname");
-    const email = document.querySelector<HTMLInputElement>("#email");
-    const password = document.querySelector<HTMLInputElement>("#password");
+    const [nickname, setNickname] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     let formData:SignUpForm = {
         nickname: "",
@@ -105,19 +99,18 @@ export default function SignUp()
         }
         finally
         {
-            delay.then(() => setLoading(false));
+          
         }
     }
 
     function validateEmail()
     {
-        setEmailError(emailProvider.validateEmail(email?.value));
+        setEmailError(emailProvider.validateEmail(email));
     }
-
 
     function validateNickname()
     {
-        setNicknameError(nicknameProvider.validateNickname(nickname?.value));
+        setNicknameError(nicknameProvider.validateNickname(nickname));
     }
 
     function showPasswordValidator()
@@ -125,9 +118,10 @@ export default function SignUp()
         setPasswordValidatorDisplay(true);
     }
 
-    function validatePassword()
+    function validatePassword(e : React.ChangeEvent<HTMLInputElement> | any)
     {
-        setPasswordErrors(pwProvider.validatePassword(password?.value));
+        setPassword(e);
+        setPasswordErrors(pwProvider.validatePassword(password));
     }
 
 
@@ -138,9 +132,9 @@ export default function SignUp()
         
         <form onSubmit={handleSubmit}>
             <Auth text="Please enter the required information to create an account.">
-                <FmInput id="nickname" name="nickname" title="Nickname" value="" placeholder="FluffyUnicorn" onBlur={validateNickname} isErrored={nicknameError.isErrored} errorText={nicknameError.errorText} type="text" textAlign="center" />
-                <FmInput id="email" name="email" title="E-Mail" value="" placeholder="fluffy@unicorn.com" onBlur={validateEmail} isErrored={emailError.isErrored} errorText={emailError.errorText} type="email" textAlign="center" />
-                <FmInput id="password" name="password" title="Password" value="" placeholder="●●●●●●●" onBlur={showPasswordValidator} onChange={validatePassword} isErrored={passwordErrors.error} type="password" textAlign="center" />
+                <FmInput id="nickname" name="nickname" title="Nickname" value={nickname} placeholder="FluffyUnicorn" onBlur={validateNickname} onChange={(e) => setNickname(e)} isErrored={nicknameError.isErrored} errorText={nicknameError.errorText} type="text" textAlign="center" />
+                <FmInput id="email" name="email" title="E-Mail" value={email} placeholder="fluffy@unicorn.com" onBlur={validateEmail} onChange={(e) => setEmail(e)} isErrored={emailError.isErrored} errorText={emailError.errorText} type="email" textAlign="center" />
+                <FmInput id="password" name="password" title="Password" value={password} placeholder="●●●●●●●" onBlur={showPasswordValidator} onChange={(e) => validatePassword(e)} isErrored={passwordErrors.error} type="password" textAlign="center" />
                 {passwordValidatorDisplay ? <FmPasswordValidator criteria={pwCriteria} errors={passwordErrors} /> : null}
                 <FmButton text={loading ? <LoadingOutlined /> : "Sign Up"} className="signin-button" isDisabled={loading} submmit/>
                 <FmLink text="Back to Sign In" href="/auth/signin" className="signin-link"/>

@@ -105,27 +105,9 @@ export default function SignUp()
     }
 
 
-    
-
-
     function validateNickname()
     {
-        if(nickname?.value === "" || nickname?.value == null)
-        {
-            setNicknameError("Nickname is required!");
-        }
-        else
-        {
-            try
-            {
-                z.string().min(3).max(32).parse(nickname?.value);
-                setNicknameError(null);
-            }
-            catch(error)
-            {
-                setNicknameError("Nickname must be between 3 and 32 characters!");
-            }
-        }
+        
     }
 
     function showPasswordValidator()

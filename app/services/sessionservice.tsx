@@ -2,18 +2,6 @@ import 'server-only';
 import { cookies } from 'next/headers';
 
 
-
-function encryptToken(token:string)
-{
-    return token;
-}
-
-function decryptToken(token:string)
-{
-    return token;
-}
-
-
 export async function createSession(token:string, id:string, expiresIn:number) {
 
     const session = {
@@ -23,7 +11,7 @@ export async function createSession(token:string, id:string, expiresIn:number) {
     }
     const expiresAt = new Date().getTime() + expiresIn * 1000;
 
-    cookies().set('session/token', JSON.stringify(session), {
+    cookies().set('session', JSON.stringify(session), {
         httpOnly: true,
         secure: true,
         expires: expiresAt,

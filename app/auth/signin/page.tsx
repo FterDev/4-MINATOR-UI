@@ -9,14 +9,18 @@ import FmLink from '@/app/components/ui/fmlink/fmlink';
 import Auth0Service from "@/app/services/auth0service";
 import { LoadingOutlined } from "@ant-design/icons";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
+import { set } from "zod";
 
 
 
+
+    
+
+    
 
 export default function SignIn()
 {
-
 
     const [error, setError] = useState<Boolean>(true);
     const [emailError , setEmailError] = useState<ValidationErrorResponse>(
@@ -35,6 +39,7 @@ export default function SignIn()
     const [loading, setLoading] = useState<boolean>(false);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
 
     const emailValidation = new EmailValidationProvider();
     const passwordValidation = new PasswordValidationProvider(null);
@@ -58,26 +63,38 @@ export default function SignIn()
 
         if (!error) {
             setLoading(true);
-            await auth0service.signIn({email: email, password: password}).then((response) => {
+            const body = {
+                email: email,
+                password: password
+            }
+            const res = await fetch("/api/auth", {method: "POST", body: JSON.stringify(body) });              
+            const data = await res.json();
+            
+            console.log(data);
+
+            if (data.error) {
                 setLoading(false);
-                if(response.error == "invalid_grant")
-                {
-                    setEmailError({errorText: "Invalid email or password", isErrored: true});
+                
+                if (data.error === "invalid_grant") {
+                    setEmailError({errorText: "Invalid e-mail or password!", isErrored: true});
                     setPasswordError({errorText: "", isErrored: true});
-                    setLoading(false);
+                    return;
+                }
+                if (data.error === "access_denied") {
+                    setEmailError({errorText: "Confirm your e-mail first!", isErrored: true});
+                    setPasswordError({errorText: "", isErrored: true});
                     return;
                 }
 
-                if(response.error == "access_denied")
-                {
-                    setEmailError({errorText: "Please verify your e-mail first!", isErrored: true});
-                    setLoading(false);
-                    return;
-                }
+                window.alert("An error occured. Please try again later.");
+                
+                return;
+            }
 
-                
-                
-            });
+            
+
+            setLoading(false);
+            
             
         }
     

@@ -9,8 +9,11 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import Auth0Service from "@/app/services/auth0service";
+import { createSession } from "@/app/services/sessionservice";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { create } from "domain";
+import { redirect } from "next/dist/server/api-utils";
+import { use, useState } from "react";
 import { set } from "zod";
 
 
@@ -66,13 +69,18 @@ export default function SignIn()
                     setEmailError({errorText: "Invalid email or password", isErrored: true});
                     setPasswordError({errorText: "", isErrored: true});
                     setLoading(false);
+                    return;
                 }
 
                 if(response.error == "access_denied")
                 {
                     setEmailError({errorText: "Please verify your e-mail first!", isErrored: true});
                     setLoading(false);
+                    return;
                 }
+
+                
+                
             });
             
         }

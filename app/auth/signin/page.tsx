@@ -1,6 +1,4 @@
 'use client';
-
-
 import Auth from "@/app/components/app/auth/auth";
 import EmailValidationProvider from "@/app/components/app/validations/emailvalidationprovider";
 import PasswordValidationProvider from "@/app/components/app/validations/passwordvalidationprovider";
@@ -9,12 +7,10 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import Auth0Service from "@/app/services/auth0service";
-import { createSession } from "@/app/services/sessionservice";
 import { LoadingOutlined } from "@ant-design/icons";
-import { create } from "domain";
-import { redirect } from "next/dist/server/api-utils";
-import { use, useState } from "react";
-import { set } from "zod";
+import { redirect } from "next/navigation";
+import { useState } from "react";
+
 
 
 

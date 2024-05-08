@@ -1,0 +1,45 @@
+
+
+.fm-message-container
+{
+    width: 100%;
+    height: 100vh;
+}
+
+.fm-message
+{
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.fm-message-icon
+{
+    font-size: 7.5em;
+}
+
+.success
+{
+    color: var(--green)
+}
+
+.error
+{
+    color: var(--red)
+}
+
+.warning
+{
+    color: var(--yellow)
+}
+
+.fm-message-content
+{
+    margin-top: 20px;
+    
+}
+
+.fm-message-text
+{
+    font-size: 1.3em;
+    padding: 20px 10px;
+}

@@ -6,7 +6,7 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
-import Auth0Service from "@/app/services/auth0service";
+import { ResetPassword } from "@/app/services/auth0service";
 import { LoadingOutlined } from "@ant-design/icons";
 import { FormEvent, useState } from "react";
 
@@ -28,7 +28,7 @@ export default function Forgot()
     const [email, setEmail] = useState<string>("");
 
     const emailValidation = new EmailValidationProvider();
-    const auth0service = new Auth0Service();
+    
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>)
     {
@@ -52,7 +52,7 @@ export default function Forgot()
         if(!error)
         {
             setLoading(true);
-            auth0service.resetPassword(email).then(() => {
+            ResetPassword(email).then(() => {
                 setLoading(false);
                 setEmail("");
                 setSuccess(true);

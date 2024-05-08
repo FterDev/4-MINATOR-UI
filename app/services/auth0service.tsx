@@ -64,6 +64,16 @@ export default class Auth0Service
        
     }
 
+    public async setSessionData(id:string)
+    {
+        let body = {
+            id_token: id
+        }
+
+        let response = await this.sendRequest('tokeninfo', 'POST', body);
+        return this.parseResponse(response, 'json');
+    }
+
     private async sendRequest(route:string, method:string, body:any)
     {
         const response = await fetch(`https://${auth0domain}/${route}`, {
@@ -91,6 +101,8 @@ export default class Auth0Service
         return Error('No data type specified');
     }
 }
+
+
 
 
 

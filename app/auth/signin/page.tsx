@@ -6,11 +6,9 @@ import ValidationErrorResponse from "@/app/components/app/validations/validation
 import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
-import Auth0Service from "@/app/services/auth0service";
 import { LoadingOutlined } from "@ant-design/icons";
-import { redirect } from "next/navigation";
-import { use, useEffect, useState } from "react";
-import { set } from "zod";
+import { useState } from "react";
+
 
 
 
@@ -43,7 +41,6 @@ export default function SignIn()
 
     const emailValidation = new EmailValidationProvider();
     const passwordValidation = new PasswordValidationProvider(null);
-    const auth0service = new Auth0Service();
 
     function checkAllInputs() {
         setEmailError(emailValidation.validateEmail(email));
@@ -86,16 +83,14 @@ export default function SignIn()
                     return;
                 }
 
-                window.alert("An error occured. Please try again later.");
+                window.alert(`An error occured. Please try again later. \n ${data.error}`);
                 
                 return;
             }
 
             
+            setLoading(false);            
 
-            setLoading(false);
-            
-            
         }
     
     }

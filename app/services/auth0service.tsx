@@ -20,7 +20,7 @@ interface SignInProps
 
 
 
-    async function SignUp(props:SignUpProps)
+    export async function SignUp(props:SignUpProps)
     {
         let body = {
             client_id: auth0client,
@@ -34,7 +34,7 @@ interface SignInProps
         return ParseResponse(response, 'json');
     }
 
-    async function SignIn(props:SignInProps)
+    export async function SignIn(props:SignInProps)
     {
         let body = {
             client_id: auth0client,
@@ -49,7 +49,7 @@ interface SignInProps
         return ParseResponse(response, 'json');
     }
 
-    async function  ResetPassword(email:string)
+    export async function  ResetPassword(email:string)
     {
         let body = {
             client_id: auth0client,

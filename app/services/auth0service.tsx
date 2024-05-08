@@ -19,9 +19,8 @@ interface SignInProps
 }
 
 
-export default class Auth0Service
-{
-    public async signUp(props:SignUpProps)
+
+    async function SignUp(props:SignUpProps)
     {
         let body = {
             client_id: auth0client,
@@ -31,11 +30,11 @@ export default class Auth0Service
             connection: 'Username-Password-Authentication',
         }
 
-        let response  = await this.sendRequest('dbconnections/signup', 'POST', body);
-        return this.parseResponse(response, 'json');
+        let response  = await SendRequest('dbconnections/signup', 'POST', body);
+        return ParseResponse(response, 'json');
     }
 
-    public async signIn(props:SignInProps)
+    async function SignIn(props:SignInProps)
     {
         let body = {
             client_id: auth0client,
@@ -46,11 +45,11 @@ export default class Auth0Service
             organization: ''
         }
 
-        let response = await this.sendRequest('oauth/token', 'POST', body);
-        return this.parseResponse(response, 'json');
+        let response = await SendRequest('oauth/token', 'POST', body);
+        return ParseResponse(response, 'json');
     }
 
-    public async resetPassword(email:string)
+    async function  ResetPassword(email:string)
     {
         let body = {
             client_id: auth0client,
@@ -59,35 +58,38 @@ export default class Auth0Service
             organization: ''
         }
 
-        let response = await this.sendRequest('dbconnections/change_password', 'POST', body);
-        return this.parseResponse(response, 'text');
+        let response = await SendRequest('dbconnections/change_password', 'POST', body);
+        return ParseResponse(response, 'text');
        
     }
 
-    public async setSessionData(id:string)
+    export async function SetSessionData(token:string)
     {
-        let body = {
-            id_token: id
+
+        let headers = {
+            Authorization: `Bearer ${token}`
         }
 
-        let response = await this.sendRequest('tokeninfo', 'POST', body);
-        return this.parseResponse(response, 'json');
+        let body = {
+            
+        }
+       
+        let response = await SendRequest('userinfo', 'GET', body, headers);
+        return ParseResponse(response, 'json');
     }
 
-    private async sendRequest(route:string, method:string, body:any)
+    async function SendRequest(route:string, method:string, body:any, headers?:any)
     {
         const response = await fetch(`https://${auth0domain}/${route}`, {
             method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: headers ? headers : { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(body)
         });
         
         return response;
     }
 
-    private async parseResponse(response:Response, awaitedData:string)
+    async function ParseResponse(response:Response, awaitedData:string)
     {
         if(awaitedData === 'text')
         {
@@ -100,7 +102,7 @@ export default class Auth0Service
         
         return Error('No data type specified');
     }
-}
+
 
 
 

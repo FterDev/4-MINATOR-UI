@@ -10,7 +10,7 @@ import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
 import FmPasswordValidator from "@/app/components/ui/fmpasswordvalidator/fmpasswordvalidator";
-import Auth0Service, { SignUpProps } from "@/app/services/auth0service";
+import { SignUp as SignUpAuth0, SignUpProps } from "@/app/services/auth0service";
 import { LoadingOutlined } from "@ant-design/icons";
 import React, { FormEvent, useState } from "react";
 
@@ -76,7 +76,6 @@ export default function SignUp()
     const pwProvider = new PasswordValidationProvider(pwCriteria);
     const emailProvider = new EmailValidationProvider();
     const nicknameProvider = new NicknameValidationProvider();
-    const auth0provider = new Auth0Service();
 
     function validateEmail()
     {
@@ -134,7 +133,7 @@ export default function SignUp()
                 password: password
             }
             
-            await auth0provider.signUp(data).then((result) => {
+            await SignUpAuth0(data).then((result) => {
                 
                 if (result.statusCode === 400)
                 {

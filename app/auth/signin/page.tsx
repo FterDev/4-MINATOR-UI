@@ -60,7 +60,7 @@ export default function SignIn()
         
         event.preventDefault();
         checkAllInputs();
-
+        
         
 
         if (!error) {
@@ -87,13 +87,17 @@ export default function SignIn()
                     setPasswordError({errorText: "", isErrored: true});
                     return;
                 }
+                if(data.status === 200){
+                    
+                    return;
+                }
 
                 window.alert(`An error occured. Please try again later. \n ${data.error}`);
                 
                 return;
             }
 
-            setError(true);
+            
             setLoading(false);            
             
         }

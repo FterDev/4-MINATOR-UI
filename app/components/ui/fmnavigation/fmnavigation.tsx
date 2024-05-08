@@ -3,6 +3,7 @@ import FmCard from "../fmcard/fmcard";
 import { Flex } from 'antd';
 import Image from 'next/image';
 import FmButton from '../fmbutton/fmbutton';
+import FmNavButtonContent from '../fmnavbuttoncontent/fmnavbuttoncontent';
 
 
 
@@ -23,7 +24,9 @@ let FmNavigation: React.FC<FmNavigationProps> = (props) => {
                     <h2 className='fm-navigation-subtitle'>What do you want to do?</h2>
                 </Flex>
                 <Flex className='fm-navigation-body' vertical justify='center'>
-                    <FmButton className='fm-navigation-button' text='Start Playing!'/>
+                    <FmButton text={
+                        <FmNavButtonContent text='Play' icon={<Image src='/img/logo_transparent.png' alt='play' width={0} height={0} sizes='100vw' className='fm-navigation-button-logo'/>}/>                        
+                    } className='fm-navigation-button'/>
                 </Flex>
             </FmCard>
         </Flex>

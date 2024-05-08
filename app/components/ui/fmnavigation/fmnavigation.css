@@ -38,3 +38,23 @@
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+
+.fm-navigation-body
+{
+    margin-top: 20px;
+    padding: 0px 40px;
+}
+
+.fm-navigation-button
+{
+    overflow: hidden;
+}
+
+.fm-navigation-button-logo
+{
+    
+    height: 100px;
+    width: auto;
+    opacity: 0.5;
+}

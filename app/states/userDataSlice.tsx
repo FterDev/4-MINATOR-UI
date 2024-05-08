@@ -16,3 +16,7 @@ export const userDataSlice = createSlice({
         }
     }
 });
+
+
+export const { setUsername, setGravatar } = userDataSlice.actions;
+export default userDataSlice.reducer;

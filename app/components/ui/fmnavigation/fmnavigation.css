@@ -49,12 +49,22 @@
 .fm-navigation-button
 {
     overflow: hidden;
+    height: 100px;
+    margin-bottom: 15px;
 }
 
 .fm-navigation-button-logo
 {
     
-    height: 100px;
+    height: 70px;
     width: auto;
+    opacity: 0.5;
+}
+
+
+.fm-navigation-button-icon
+{
+    margin-left: auto;
+    font-size: 3em;    
     opacity: 0.5;
 }

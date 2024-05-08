@@ -1,4 +1,8 @@
+'use client';
+
+import { Provider } from "react-redux";
 import FmCard from "../components/ui/fmcard/fmcard";
+import store from "../store";
 
 
 
@@ -7,8 +11,10 @@ import FmCard from "../components/ui/fmcard/fmcard";
 
 export default function Page() {
   return (
-    <FmCard>
-        <h1>Main Page!</h1>
-    </FmCard>
+    <Provider store={store}>
+      <FmCard>
+          <h1>Main Page!</h1>
+      </FmCard>
+    </Provider>
   );
 }

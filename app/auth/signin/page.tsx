@@ -95,7 +95,7 @@ export default function SignIn()
 
             if(data.status === 200){
                 
-                window.location.href = "/main";
+                window.location.href = "/game/nav";
                 return;
             }
             

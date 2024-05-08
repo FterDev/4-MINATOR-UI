@@ -1,0 +1,40 @@
+
+
+.fm-navigation-container
+{
+    width: 100%;
+}
+
+
+.fm-navigation
+{
+    margin-top: 5%;
+    width: 60%;
+    height: auto;
+
+}
+
+
+.fm-navigation-avatar
+{
+    height: 100px;
+    width: auto;
+    border-radius: 50%;
+}
+
+
+
+.fm-navigation-title
+{
+    font-size: 2rem;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+.fm-navigation-subtitle
+{
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

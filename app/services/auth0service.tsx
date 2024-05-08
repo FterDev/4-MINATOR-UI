@@ -27,6 +27,7 @@ interface SignInProps
             email: props.email,
             password: props.password,
             username: props.nickname,
+            nickname: props.nickname,
             connection: 'Username-Password-Authentication',
         }
 

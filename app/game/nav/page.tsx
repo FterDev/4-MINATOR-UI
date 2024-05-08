@@ -16,21 +16,15 @@ export default function Nav() {
     const userData = useSelector((state: any) => state.userData);
     const dispatch = useDispatch();
 
-
-    function getUserData () {
-        return fetch('/api/auth', { method: 'GET' })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        })
-    }
-
     if (!userData.username) {
-        console.log('fetching user data');
+        fetch('/api/auth', { method: 'GET' }).then(res => res.json()).then(data => {
+            dispatch(setUsername(data.nickname));
+            dispatch(setGravatar(data.picture));
+        });
     }
 
 
     return (
-        <h1>Nav!</h1>
+        <h1>Nav! - Welcome {userData.username}</h1>
     );
 }

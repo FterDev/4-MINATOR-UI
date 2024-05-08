@@ -67,14 +67,13 @@ interface SignInProps
     {
 
         let headers = {
-            Authorization: `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         }
 
-        let body = {
-            
-        }
-       
-        let response = await SendRequest('userinfo', 'GET', body, headers);
+        const response = await fetch(`https://${auth0domain}/userinfo`, {
+            method: 'GET',
+            headers: headers 
+        });
         return ParseResponse(response, 'json');
     }
 

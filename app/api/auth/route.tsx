@@ -1,14 +1,14 @@
-import Auth0Service from "@/app/services/auth0service";
+
 import { createSession } from "@/app/services/sessionservice";
 import { NextResponse } from "next/server";
+import { SignIn } from "@/app/services/auth0service";
 
 
 
 
 export async function POST(request: Request) {
     const {email, password} = await request.json()
-    const auth0service = new Auth0Service();
-    const res = await auth0service.signIn({email: email, password: password});
+    const res = await SignIn({email: email, password: password});
 
     if (res.error){
         return NextResponse.json({error: res.error, error_description: res.error_description, status: 403})

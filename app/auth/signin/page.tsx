@@ -7,6 +7,7 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import { LoadingOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 
@@ -55,6 +56,7 @@ export default function SignIn()
 
     async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
     
+        const router = useRouter();
         event.preventDefault();
         checkAllInputs();
 
@@ -90,7 +92,7 @@ export default function SignIn()
 
             
             setLoading(false);            
-
+            router.push("/main");
         }
     
     }

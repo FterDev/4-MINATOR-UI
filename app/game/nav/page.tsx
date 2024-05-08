@@ -2,6 +2,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { setUsername, setGravatar } from "@/app/states/userDataSlice";
+import FmNavigation from "@/app/components/ui/fmnavigation/fmnavigation";
 
 
 
@@ -25,6 +26,6 @@ export default function Nav() {
 
 
     return (
-        <h1>Nav! - Welcome {userData.username}</h1>
+        <FmNavigation username={userData.username} picture={userData.gravatar} />
     );
 }

@@ -4,14 +4,19 @@ import FmCard from "../fmcard/fmcard";
 
 
 
+interface FmNavigationProps {
+    username: string;
+    picture: string;
+}
 
-export default function FmNavigation() {
 
-
+let FmNavigation: React.FC<FmNavigationProps> = (props) => {
     return (
-        <FmCard>
-            test
+        <FmCard className='fm-navigation'>
+             Welcome {props.username}
         </FmCard>
     );
-
 }
+
+export default FmNavigation;
+

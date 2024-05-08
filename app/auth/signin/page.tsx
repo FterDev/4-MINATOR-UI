@@ -87,16 +87,18 @@ export default function SignIn()
                     setPasswordError({errorText: "", isErrored: true});
                     return;
                 }
-                if(data.status === 200){
-                    
-                    return;
-                }
+                
 
                 window.alert(`An error occured. Please try again later. \n ${data.error}`);
                 
                 return;
             }
 
+            if(data.status === 200){
+                
+                window.location.href = "/main";
+                return;
+            }
             
             setLoading(false);            
             

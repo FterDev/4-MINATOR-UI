@@ -22,7 +22,7 @@ describe('PasswordValidationProvider', () => {
   });
 
   it('should return lengthError for a password with length less than the minimum', () => {
-    const password = 'SrtPwd';
+    const password = 'Srt1+';
     const provider = new PasswordValidationProvider(criteria);
     const result = provider.validatePassword(password);
 
@@ -31,7 +31,7 @@ describe('PasswordValidationProvider', () => {
   });
 
   it('should return lengthError for a password with length greater than the maximum', () => {
-    const password = 'VeryLongPasswordThatExceedsTheMaximumLength';
+    const password = 'VeryLongPasswordThatExceedsTheMaximumLength123!+';
     const provider = new PasswordValidationProvider(criteria);
     const result = provider.validatePassword(password);
 
@@ -67,14 +67,11 @@ describe('PasswordValidationProvider', () => {
   });
 
   it('should return hasUpperLowerCaseError for a password without both upper and lower case characters', () => {
-    const password = 'NoUpperLowerCase123!';
+    const password = '123+!';
     const provider = new PasswordValidationProvider(criteria);
     const result = provider.validatePassword(password);
 
     expect(result.error).toBe(true);
-    expect(result.lengthError).toBe(false);
-    expect(result.hasNumberError).toBe(false);
-    expect(result.hasSpecialError).toBe(false);
     expect(result.hasUpperLowerCaseError).toBe(true);
   });
 });

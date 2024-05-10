@@ -36,12 +36,7 @@ export default function Nav() {
     }, []);
     
     if(loading) return <FmLoading />;
-
- 
-
-
     return (
-      
         <FmNavigation username={userData.username} picture={userData.gravatar} />
     );
 }

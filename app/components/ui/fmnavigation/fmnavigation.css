@@ -1,0 +1,70 @@
+
+
+.fm-navigation-container
+{
+    width: 100%;
+}
+
+
+.fm-navigation
+{
+    margin-top: 2.5%;
+    width: 50%;
+    height: auto;
+
+}
+
+
+.fm-navigation-avatar
+{
+    height: 100px;
+    width: auto;
+    border-radius: 50%;
+}
+
+
+
+.fm-navigation-title
+{
+    font-size: 2rem;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+.fm-navigation-subtitle
+{
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+.fm-navigation-body
+{
+    margin-top: 20px;
+    padding: 0px 40px;
+}
+
+.fm-navigation-button
+{
+    overflow: hidden;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.fm-navigation-button-logo
+{
+    
+    height: 70px;
+    width: auto;
+    opacity: 0.5;
+}
+
+
+.fm-navigation-button-icon
+{
+    margin-left: auto;
+    font-size: 3em;    
+    opacity: 0.5;
+}

@@ -1,0 +1,14 @@
+
+
+.fm-nav-button-content-text
+{
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+.fm-nav-button-content-icon
+{
+    margin-left: auto;
+    transform: translateX(70%);
+}

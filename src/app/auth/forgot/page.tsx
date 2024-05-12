@@ -6,11 +6,12 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
+import { app, auth } from "@/app/firebase";
 
 import { LoadingOutlined } from "@ant-design/icons";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "@/app/firebase";
-import { FormEvent, useState } from "react";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { FormEvent, useEffect, useState } from "react";
+
 
 
 
@@ -32,7 +33,7 @@ export default function Forgot()
     const emailValidation = new EmailValidationProvider();
     
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>)
+    function handleSubmit(event: FormEvent<HTMLFormElement>)
     {
         event.preventDefault();
         setEmailError(emailValidation.validateEmail(email));
@@ -54,7 +55,7 @@ export default function Forgot()
         if(!error)
         {
             setLoading(true);
-            sendPasswordResetEmail(auth, email)
+            sendPasswordResetEmail(auth, email);
             setSuccess(true);
         }
         

@@ -3,8 +3,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Provider } from "react-redux";
-import store from "./store";
+import { SessionProvider } from "next-auth/react";
 
 const montserrat = Montserrat({
   subsets: ["latin-ext"]
@@ -24,7 +23,9 @@ export default function RootLayout({
  
       <html lang="en">
         <body className={montserrat.className}>
-          {children}
+          <SessionProvider>
+            {children}
+          </SessionProvider>
         </body>
       </html>
     

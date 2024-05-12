@@ -23,7 +23,6 @@ import { useState } from "react";
 export default function SignIn()
 {
 
-    
     const [error, setError] = useState<Boolean>(true);
     const [emailError , setEmailError] = useState<ValidationErrorResponse>(
         {

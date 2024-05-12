@@ -19,8 +19,6 @@
 # misc
 .DS_Store
 *.pem
-.swc
-.swc/*
 
 # debug
 npm-debug.log*

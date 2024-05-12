@@ -6,8 +6,10 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
-import { ResetPassword } from "@/app/services/auth0service";
+
 import { LoadingOutlined } from "@ant-design/icons";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "@/app/firebase";
 import { FormEvent, useState } from "react";
 
 
@@ -52,12 +54,8 @@ export default function Forgot()
         if(!error)
         {
             setLoading(true);
-            ResetPassword(email).then(() => {
-                setLoading(false);
-                setEmail("");
-                setSuccess(true);
-                return;
-            });
+            sendPasswordResetEmail(auth, email)
+            setSuccess(true);
         }
         
     }

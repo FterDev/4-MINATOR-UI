@@ -5,6 +5,8 @@ import Image from 'next/image';
 import FmButton from '../fmbutton/fmbutton';
 import FmNavButtonContent from '../fmnavbuttoncontent/fmnavbuttoncontent';
 import { PoweroffOutlined, RobotFilled } from '@ant-design/icons';
+import { signOut } from 'next-auth/react';
+
 
 
 
@@ -16,13 +18,7 @@ interface FmNavigationProps {
 
 let FmNavigation: React.FC<FmNavigationProps> = (props) => {
 
-    async function signOut() {
-        await fetch('/api/auth', {
-            method: 'DELETE'
-        }).then(() => {
-            window.location.href = '/';
-        });
-    }
+    
 
 
     return (
@@ -43,7 +39,7 @@ let FmNavigation: React.FC<FmNavigationProps> = (props) => {
 
                     <FmButton color='secondary' text={
                         <FmNavButtonContent text='Sign out' icon={<PoweroffOutlined className='fm-navigation-button-icon' />}/>                        
-                    } className='fm-navigation-button' onClick={signOut} />
+                    } className='fm-navigation-button' onClick={() => signOut()} />
                 </Flex>
             </FmCard>
         </Flex>

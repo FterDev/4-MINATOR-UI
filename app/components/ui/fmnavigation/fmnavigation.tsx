@@ -10,7 +10,7 @@ import { PoweroffOutlined, RobotFilled } from '@ant-design/icons';
 
 
 interface FmNavigationProps {
-    username: string;
+    username?: string | null;
     picture: string;
 }
 

@@ -7,7 +7,10 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import { LoadingOutlined } from "@ant-design/icons";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
+
+
 
 
 
@@ -56,54 +59,21 @@ export default function SignIn()
 
     async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
     
-        
+        setLoading(true);
         event.preventDefault();
         checkAllInputs();
         
-        
-
-        if (!error) {
-            setLoading(true);
-            const body = {
-                email: email,
-                password: password
-            }
-            const res = await fetch("/api/auth", {method: "POST", body: JSON.stringify(body) });              
-            const data = await res.json();
-            
-            console.log(data);
-
-            if (data.error) {
-                setLoading(false);
-                
-                if (data.error === "invalid_grant") {
-                    setEmailError({errorText: "Invalid e-mail or password!", isErrored: true});
-                    setPasswordError({errorText: "", isErrored: true});
-                    return;
-                }
-                if (data.error === "access_denied") {
-                    setEmailError({errorText: "Confirm your e-mail first!", isErrored: true});
-                    setPasswordError({errorText: "", isErrored: true});
-                    return;
-                }
-                
-
-                window.alert(`An error occured. Please try again later. \n ${data.error}`);
-                
-                return;
+            if (!error) {
+                signIn('credentials', {email: email, password: password, redirect: true, callbackUrl: '/game/nav'}).then((response) => {
+                    console.log(response);
+                    setLoading(false);
+                });
             }
 
-            if(data.status === 200){
-                
-                window.location.href = "/game/nav";
-                return;
-            }
-            
-            setLoading(false);            
+            setLoading(false);   
             
         }
-    
-    }
+
 
     return (
         <form onSubmit={handleSignIn}>

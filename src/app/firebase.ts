@@ -12,6 +12,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.FB_MESSAGINGSENDERID,
   appId: process.env.FB_APPID,
   measurementId: process.env.FB_MEASUREMENTID,
+  
 };
 
 
@@ -19,5 +20,7 @@ const firebaseConfig = {
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
+
+
 
 export { app, db, auth };

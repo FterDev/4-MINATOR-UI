@@ -7,13 +7,7 @@ import { SignJWT, jwtVerify } from 'jose'
 
 
 export const authOptions = {
-  session:
-  {
-    strategy: 'jwt' as const,
-    maxAge: 30 * 24 * 60 * 60,
-    updateAge: 24 * 60 * 60,
-    
-  },
+  
   pages: {
     signIn: '/auth/signin'
   },
@@ -27,8 +21,10 @@ export const authOptions = {
       async authorize(credentials): Promise<any> {
         return await signInWithEmailAndPassword(auth, credentials?.email || '', credentials?.password || '')
           .then(userCredential => {
-            if (userCredential.user) {
-              return userCredential.user;
+
+            if (userCredential) {
+
+              return userCredential;
             }
 
             return null;

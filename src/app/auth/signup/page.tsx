@@ -10,8 +10,13 @@ import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
 import FmPasswordValidator from "@/app/components/ui/fmpasswordvalidator/fmpasswordvalidator";
-import { SignUp as SignUpAuth0, SignUpProps } from "@/app/services/auth0service";
+import { app, auth, db } from "@/app/firebase";
 import { LoadingOutlined } from "@ant-design/icons";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { set } from "firebase/database";
+import { addDoc, collection, doc, documentId, setDoc } from "firebase/firestore";
+import { redirect } from "next/navigation";
+
 import React, { FormEvent, useState } from "react";
 
 
@@ -57,15 +62,9 @@ export default function SignUp()
     const [nickname, setNickname] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [newUser, setNewUser] = useState<string>(""); 
 
-    let formData:SignUpForm = {
-        nickname: "",
-        email: "",
-        password: ""
-    }
-
-
-    const pwCriteria:PasswordValidatorCriteria = {
+     const pwCriteria:PasswordValidatorCriteria = {
         min: 8,
         max: 32,
         hasNumber: true,
@@ -126,32 +125,43 @@ export default function SignUp()
         }
         
       
-            setLoading(true);
-            let data:SignUpProps = {
-                nickname: nickname,
-                email: email,
-                password: password
-            }
-            
-            await SignUpAuth0(data).then((result) => {
-                
-                if (result.statusCode === 400)
-                {
-                    setLoading(false);
-                    setError(true);
-                    setEmailError({errorText: "E-Mail or Nickname already in use!", isErrored: true});
-                    setNicknameError({errorText: "E-Mail or Nickname already in use!", isErrored: true});
-                    return;
-                }
-                
-                setEmail("");
-                setNickname("");
-                setPassword("");
-                setLoading(false);
-                setSuccess(true);
-                return;
+        setLoading(true);
+        
+        await createUserWithEmailAndPassword(auth, email, password)
+        .then(
+            (res) => {
+                 setNewUser(res.user.uid);                        
 
-            });
+                 try {
+                    addDoc(collection(db, "fmusers", newUser), {
+                        nickname: nickname,
+                        email: email,
+                    });
+                  
+                    
+                  } catch (e) {
+                    console.error("Error adding document: ", e);
+                  }
+                                                       
+            }                     
+        )
+        .catch((error) => {
+            console.log(error);
+        });
+
+        
+        console.log("Wrote to database");
+
+      
+        
+
+        
+        
+
+
+            
+
+            
             
 
         

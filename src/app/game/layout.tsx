@@ -1,4 +1,4 @@
-
+'use client';
 
 
 export default function Layout({
@@ -6,9 +6,15 @@ export default function Layout({
   }: {
     children: React.ReactNode
   }) {
+
+
     return (
         <>
+      
+        
             {children}
+          
+            
         </>
     );
 }

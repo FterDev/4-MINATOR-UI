@@ -23,9 +23,9 @@ export const authOptions = {
           .then(userCredential => {
 
             if (userCredential) {
-
-              return userCredential;
-            }
+              
+              return userCredential.user;
+                        }
 
             return null;
           })

@@ -4,8 +4,6 @@ import { redirect } from 'next/navigation';
 import FmNavigation from "@/app/components/ui/fmnavigation/fmnavigation";
 
 import { useSession } from "next-auth/react";
-import { getToken } from 'next-auth/jwt';
-import { use, useEffect } from 'react';
 
 
 
@@ -16,9 +14,10 @@ import { use, useEffect } from 'react';
 
 
 
-export default function Nav() {
+
+export default  function Nav() {
     
-    const session = useSession({
+    const session :any = useSession({
         required: true,
         onUnauthenticated() {
           redirect('/auth/signin');
@@ -27,12 +26,13 @@ export default function Nav() {
       });
 
 
+      console.log(session.data?.token?.user.stsTokenManager.accessToken);
       
-      
-      console.log(session);
       
     
     return (
+      
+    
         <FmNavigation username={session.data?.user?.email} picture="/img/logo_transparent.png" />
     );
 }

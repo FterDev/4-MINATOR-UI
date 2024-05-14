@@ -26,7 +26,7 @@ export default  function Nav() {
       });
 
 
-      console.log(session.data?.token?.user.stsTokenManager.accessToken);
+      console.log(session);
       
       
     

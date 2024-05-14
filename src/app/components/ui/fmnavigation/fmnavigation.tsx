@@ -6,6 +6,7 @@ import FmButton from '../fmbutton/fmbutton';
 import FmNavButtonContent from '../fmnavbuttoncontent/fmnavbuttoncontent';
 import { PoweroffOutlined, RobotFilled } from '@ant-design/icons';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -19,6 +20,7 @@ interface FmNavigationProps {
 let FmNavigation: React.FC<FmNavigationProps> = (props) => {
 
     
+    const router = useRouter();
 
 
     return (
@@ -34,8 +36,8 @@ let FmNavigation: React.FC<FmNavigationProps> = (props) => {
                         <FmNavButtonContent text='Play' icon={<Image src='/img/logo_transparent.png' alt='play' width={0} height={0} sizes='100vw' className='fm-navigation-button-logo'/>}/>                        
                     } className='fm-navigation-button'/>
                     <FmButton text={
-                        <FmNavButtonContent text='Edit Robots' icon={<RobotFilled className='fm-navigation-button-icon' />}/>                        
-                    } className='fm-navigation-button'/>
+                        <FmNavButtonContent text='Edit Robots' icon={<RobotFilled className='fm-navigation-button-icon'/>} />                        
+                    } className='fm-navigation-button' onClick={() => router.push("/game/robots")} />
 
                     <FmButton color='secondary' text={
                         <FmNavButtonContent text='Sign out' icon={<PoweroffOutlined className='fm-navigation-button-icon' />}/>                        

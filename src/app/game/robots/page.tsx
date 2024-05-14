@@ -65,7 +65,7 @@ export default function Robots()
                 console.log(res);
                 setData(res);
             });
-            connect.invoke("GetRobots");
+            connect.invoke("GetRobots").catch((err) => console.log(err));
             
         
         }).catch((err) => console.log(err));
@@ -79,18 +79,10 @@ export default function Robots()
     }, []);
 
 
-    async function updateTable(){
-        if(connection){
-            connection.invoke("GetRobots");
-        }
-    }
    
-
-
     return (
         <>
             <FmCard className="robots">
-                
                 <Flex>
                     <FmTable columns={columns} data={data} />
                 </Flex>

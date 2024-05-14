@@ -20,7 +20,7 @@ export const authOptions = {
       },
       async authorize(credentials): Promise<any> {
         return await signInWithEmailAndPassword(auth, credentials?.email || '', credentials?.password || '')
-          .then(userCredential => {
+          .then((userCredential : any) => {
 
             if (userCredential) {
               
@@ -39,13 +39,10 @@ export const authOptions = {
     })
   ],
   callbacks: {
-    async jwt({token, user, account, profile, isNewUser} : {token: any, account:any,user: any, profile: any, isNewUser: any}) {
+    async jwt({token, user, account} : {token: any, account:any, user: any, }) {
       if (user) {
         token.user = user;
         token.accessToken = account;
-        token.profile = profile;
-        token.isNewUser = isNewUser;
-        
       }
       return token;
     },

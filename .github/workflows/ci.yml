@@ -36,7 +36,6 @@ jobs:
   test:
     name: Test Project & Run SonarCloud Scan
     runs-on: ubuntu-22.04
-    needs: [build]
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js 20
@@ -56,7 +55,7 @@ jobs:
 
   release:
     name: Run Semantic-Release
-    needs: [build, test]
+    needs: [build]
     runs-on: ubuntu-22.04
     permissions:
       contents: write 

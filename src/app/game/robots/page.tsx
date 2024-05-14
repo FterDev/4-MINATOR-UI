@@ -52,9 +52,9 @@ export default function Robots()
 
     useEffect(() => {
 
-
+        const backend = process.env.BACKEND_URL;
         const connect = new HubConnectionBuilder()
-            .withUrl("http://localhost:5199/robotsHub", {skipNegotiation: true, transport: 1})
+            .withUrl("https://int.backend.4-minator.ch/robotshub", {skipNegotiation: true, transport: 1})
             .withAutomaticReconnect()
             .build();
 

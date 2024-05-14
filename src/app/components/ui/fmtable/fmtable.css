@@ -1,0 +1,88 @@
+
+
+.fm-table
+{
+    width: 100%;
+    border: 1px solid #2D4552;
+    border-radius: 15px;
+    padding: 0px;
+    border-spacing: 0px;
+}
+
+.fm-table > thead
+{
+    background-color: rgba(45, 69, 82, 0.5);    
+}
+
+
+.fm-table > thead > tr
+{
+    border-bottom: 1px solid #2D4552;
+}
+
+.fm-table > thead > tr > th 
+{
+    padding: 15px;
+    border: 0px;
+    border-right: 1px solid #2D4552;
+}
+
+.fm-table > thead > tr > th:first-child
+{
+    border-top-left-radius: 15px;
+}
+
+.fm-table > thead > tr > th:last-child
+{
+    border-top-right-radius: 15px;
+}
+
+
+.fm-table > tbody > tr > td
+{
+    padding: 15px;
+    
+    border-bottom: 1px solid #2D4552;
+    text-align: center;
+    border-right: 1px solid #2D4552;
+}
+
+.fm-table > tbody > tr:nth-child(even)
+{
+    background-color: rgba(45, 69, 82, 0.2);
+}
+
+.fm-table > tbody > tr > td:last-child
+{
+        border-right: 0px;
+}
+
+.fm-table > tbody > tr:hover
+{
+
+    filter: opacity(0.8);
+}
+
+
+
+
+.fm-table > tbody > tr:last-child > td
+{
+    padding: 15px;
+    border: 0px;
+    text-align: center;
+    border-bottom: 0px;
+    border-right: 1px solid #2D4552;
+}
+
+.fm-table > tbody > tr:last-child > td:last-child
+{
+   
+    border-right: 0px;
+}
+
+
+.fm-table-button
+{
+    max-height: 20px !important;
+}

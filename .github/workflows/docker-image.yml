@@ -14,10 +14,17 @@ jobs:
 
       - name: Set env vars
         run: |
-          cp .env.local.template .env.local
-          sed -i "s|%AUTHZERODOMAIN%|${{ secrets.AUTHZERODOMAIN }}|g" .env.local
-          sed -i "s|%AUTHZEROCLIENTID%|${{ secrets.AUTHZEROCLIENTID }}|g" .env.local
-          sed -i "s|%AUTHZEROCLIENTSECRET%|${{ secrets.AUTHZEROCLIENTSECRET }}|g" .env.local
+          cp .env.template .env
+          sed -i "s|%URL%|${{ secrets.URL }}|g" .env
+          sed -i "s|%SECRETUI%|${{ secrets.SECRETUI }}|g" .env
+
+          sed -i "s|%FBAPIKEY%|${{ secrets.FBAPIKEY }}|g" .env
+          sed -i "s|%FBAUTHDOMAIN%|${{ secrets.FBAUTHDOMAIN }}|g" .env
+          sed -i "s|%FBPROJECTID%|${{ secrets.FBPROJECTID }}|g" .env
+          sed -i "s|%FBSTORAGE%|${{ secrets.FBSTORAGE }}|g" .env
+          sed -i "s|%FBMESSAGINGSENDERID%|${{ secrets.FBMESSAGINGSENDERID }}|g" .env
+          sed -i "s|%FBAPPID%|${{ secrets.FBAPPID }}|g" .env
+          sed -i "s|%FBMEASUREMENTID%|${{ secrets.FBMEASUREMENTID }}|g" .env
           
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3

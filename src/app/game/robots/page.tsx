@@ -37,6 +37,9 @@ export default function Robots()
         { key: 'edit', title: ''}
     ];
 
+    const backendUrl = process.env.NEXT_PUBLIC_LINK_BACKEND;
+
+
 
     interface Robot {
         id: number;
@@ -54,7 +57,7 @@ export default function Robots()
 
         const backend = process.env.BACKEND_URL;
         const connect = new HubConnectionBuilder()
-            .withUrl("https://int.backend.4-minator.ch/robotshub", {skipNegotiation: true, transport: 1})
+            .withUrl(backendUrl + "/robotsHub", {skipNegotiation: true, transport: 1})
             .withAutomaticReconnect()
             .build();
 

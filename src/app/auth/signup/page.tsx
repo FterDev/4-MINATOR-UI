@@ -10,12 +10,10 @@ import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import FmMessage from "@/app/components/ui/fmmessage/fmmessage";
 import FmPasswordValidator from "@/app/components/ui/fmpasswordvalidator/fmpasswordvalidator";
-import { app, auth, db } from "@/app/firebase";
+import { auth, db } from "@/app/firebase";
 import { LoadingOutlined } from "@ant-design/icons";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { set } from "firebase/database";
-import { addDoc, collection, doc, documentId, setDoc } from "firebase/firestore";
-import { redirect } from "next/navigation";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 import React, { FormEvent, useState } from "react";
 
@@ -115,56 +113,31 @@ export default function SignUp()
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>)
     {
+        
         event.preventDefault();
-        checkAllinputs();
 
-        if(error)
-        {
-            setLoading(false);
-            return;
-        }
+       
+            await createUserWithEmailAndPassword(auth, email, password)
+            .then(
+                (res) => {
+                    console.log(res);
+                   setDoc(doc(db, "users", res.user.uid), {
+                          nickname: nickname,
+                          email: email
+                   }).then( () => {
+                        setSuccess(true);
+                    }
+                   );
+                }                     
+            ).catch((error) => {
+                setError(true);
+                console.log(error);
+            });
         
-      
-        setLoading(true);
-        
-        await createUserWithEmailAndPassword(auth, email, password)
-        .then(
-            (res) => {
-                 setNewUser(res.user.uid);                        
 
-                 try {
-                    addDoc(collection(db, "fmusers", newUser), {
-                        nickname: nickname,
-                        email: email,
-                    });
-                  
-                    
-                  } catch (e) {
-                    console.error("Error adding document: ", e);
-                  }
-                                                       
-            }                     
-        )
-        .catch((error) => {
-            console.log(error);
-        });
-
-        
-        console.log("Wrote to database");
 
       
-        
 
-        
-        
-
-
-            
-
-            
-            
-
-        
        
     }
 

@@ -4,8 +4,11 @@ import sessionReducer from "./slices/sessionSlice";
 
 
 
-export const store = configureStore({
+export const rootRedux = configureStore({
     reducer: {
         session: sessionReducer
     }
 });
+
+
+export default rootRedux;

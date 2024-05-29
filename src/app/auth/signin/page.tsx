@@ -83,7 +83,7 @@ export default function SignIn()
                     }
 
                     setLoading(true);
-                    router.push('/game/nav');
+                    router.push('/in/game/nav');
                     
                 });
             }

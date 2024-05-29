@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation';
 import FmNavigation from "@/app/components/ui/fmnavigation/fmnavigation";
 
 import { useSession } from "next-auth/react";
-import test from 'node:test';
 import { useSelector } from 'react-redux';
 
 
@@ -33,7 +32,7 @@ export default  function Nav() {
     return (
       
     
-        <FmNavigation username={sessionData.nickname} picture="/img/logo_transparent.png" />
+        <FmNavigation username={sessionData.nickname} picture={sessionData.picture} />
     );
 }
 

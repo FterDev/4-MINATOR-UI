@@ -1,6 +1,7 @@
 
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDatabase, ref } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 
 
@@ -21,6 +22,7 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
+ 
 
 
 

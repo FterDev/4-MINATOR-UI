@@ -57,9 +57,9 @@ export default function Layout({
       dispatch(setSession({
         userId: userId,
         token: token,
-        nickname: docSnap.data().nickname,
-        email: docSnap.data().email,
-        picture: docSnap.data().picture
+        nickname: docSnap?.data().nickname,
+        email: docSnap?.data().email,
+        picture: docSnap?.data().picture
       }));
       setLoading(false);
     });

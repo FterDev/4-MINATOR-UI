@@ -81,7 +81,7 @@ export default function SignIn()
                         window.alert(`Something went wrong :( \n ${response?.status}`)
                         return;
                     }
-
+ 
                     setLoading(true);
                     router.push('/game/nav');
                     

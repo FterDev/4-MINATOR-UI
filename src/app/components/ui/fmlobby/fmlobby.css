@@ -8,4 +8,19 @@
     width: 60%;
     margin: 0 auto;
     margin-top: 2.5%;
+    padding: 40px 80px !important;
+    max-height: 80vh;
+    
 }
+
+.fm-lobby-options
+{
+    margin-bottom: 40px;
+}
+
+.fm-lobby-table-wrapper
+{
+    max-height: 80vh;
+    overflow-x: auto;
+}
+

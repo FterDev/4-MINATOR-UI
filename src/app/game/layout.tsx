@@ -65,7 +65,7 @@ export default function Layout({
       setLoading(false);
     });
 
-    console.log(sessionData);
+  
 
     
 

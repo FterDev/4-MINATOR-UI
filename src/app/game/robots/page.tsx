@@ -55,7 +55,6 @@ export default function Robots()
 
     useEffect(() => {
 
-        const backend = process.env.BACKEND_URL;
         const connect = new HubConnectionBuilder()
             .withUrl(backendUrl + "/robotsHub", {skipNegotiation: true, transport: 1})
             .withAutomaticReconnect()

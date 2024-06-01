@@ -120,12 +120,18 @@ export default function SignUp()
             await createUserWithEmailAndPassword(auth, email, password)
             .then(
                 (res) => {
-                    console.log(res);
                    setDoc(doc(db, "users", res.user.uid), {
                           nickname: nickname,
                           email: email
                    }).then( () => {
-                        setSuccess(true);
+                        fetch(process.env.NEXT_PUBLIC_LINK_BACKEND + `/api/User?externalId=${res.user.uid}&nickname=${nickname}` , {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Auth-Key': `${process.env.NEXT_PUBLIC_BACKEND_KEY}`
+                            },
+                            
+                        }).then((result) => {console.log(result);});
                     }
                    );
                 }                     

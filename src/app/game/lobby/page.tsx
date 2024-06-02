@@ -14,10 +14,17 @@ export default function Lobby()
 
     const sessionData = useSelector((state: any) => state.session);
 
-    const [data, setData] = useState<String>('');
+    const [players, setPlayers] = useState<String>('');
     const [connection, setConnection] = useState<HubConnection | null>(null);
 
     const backendUrl = process.env.NEXT_PUBLIC_LINK_BACKEND;
+
+
+    async function requestMatch(playerId: number)
+    {
+        connection?.invoke("RequestMatch", playerId).catch((err) => console.log(err));
+    }
+
 
     useEffect(() => {
 
@@ -33,8 +40,11 @@ export default function Lobby()
         connect.start().then(() => { 
             
             connect.on("ReceiveWaitingPlayers", (res) => {
-                console.log(res);
-                
+                setPlayers(res);
+            });
+
+            connect.on("ReceiveMatchRequest", (res) => {
+                window.alert("Match request from " + res.nickname);
             });
 
             
@@ -52,8 +62,7 @@ export default function Lobby()
     
    
     return (
-        <FmLobby>
-            
-        </FmLobby>
+        <FmLobby data={players} requestMatch={requestMatch} />
+        
     )
 }

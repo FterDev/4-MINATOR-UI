@@ -67,8 +67,7 @@ export default function Robots()
                 console.log(res);
                 setData(res);
             });
-            connect.invoke("GetRobots").catch((err) => console.log(err));
-            
+            connect.invoke("GetRobots").catch((err) => console.log(err));         
         
         }).catch((err) => console.log(err));
 

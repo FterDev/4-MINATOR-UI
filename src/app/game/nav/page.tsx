@@ -5,13 +5,8 @@ import FmNavigation from "@/app/components/ui/fmnavigation/fmnavigation";
 
 import { useSession } from "next-auth/react";
 import { useSelector } from 'react-redux';
-
-
-
-
-
-
-
+import { useEffect, useState } from 'react';
+import { getProfilePicture } from '@/app/services/firefs';
 
 
 
@@ -27,12 +22,20 @@ export default  function Nav() {
 
   const sessionData = useSelector((state: any) => state.session);
       
-      
+    const [picture, setPicture] = useState<string>('');
     
+
+    useEffect(() => {
+      getProfilePicture(sessionData.userId).then((res) => {
+        setPicture(res!);
+      });
+    }, []);
+
+
     return (
       
     
-        <FmNavigation username={sessionData.nickname} picture={sessionData.picture} />
+        <FmNavigation username={sessionData.nickname} picture={picture} />
     );
 }
 

@@ -9,6 +9,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 import Image from "next/image";
 import './fmlobbycell.css';
 import { useSelector } from "react-redux";
+import { getProfilePicture } from "@/app/services/firefs";
 
 
 
@@ -20,24 +21,7 @@ interface FmLobbyCellProps {
 }
 
 
-async function getProfilePic(externalId : string)
-{
 
-    
-
-    let error = false;
-     
-    let fileRef = await getDownloadURL(ref(storage, 'avatars/' + externalId + '.png')).catch((err) => {
-        error = true;
-    });
-
-    if(!error) {
-        return fileRef;
-    }
-
-    return await getDownloadURL(ref(storage, 'avatars/placeholder.webp'));
-
-}
 
 
 export const FmLobbyCell: React.FC<FmLobbyCellProps> = ({externalId, nickname, playerId, request}) => {
@@ -47,7 +31,7 @@ export const FmLobbyCell: React.FC<FmLobbyCellProps> = ({externalId, nickname, p
     const sessionData = useSelector((state: any) => state.session);
 
     useEffect(() => {
-        getProfilePic(externalId).then((res) => {
+        getProfilePicture(externalId).then((res) => {
             setProfilePic(res!);
         }).then(() => {
             setPicLoading(false);

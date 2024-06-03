@@ -44,6 +44,9 @@ export default function FmLobby(data: FmLobbyProps)
             <Flex className="fm-lobby-options">
                 <FmButton text="Back" className="fm-lobby-button" onClick={()=>{router.push('/game/nav')}}/>
             </Flex>
+            <Flex justify="center">
+                <h1>Available Players:</h1>
+            </Flex>
             <div className="fm-lobby-table-wrapper">
                 {playersArray.map((player: any) => {
                     return <FmLobbyCell externalId={player.user.externalId} nickname={player.user.nickname} playerId={player.id} request={data.requestMatch} />

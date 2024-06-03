@@ -1,5 +1,6 @@
 'use clientq'
 
+import FmField from "@/app/components/ui/fmfield/fmfield";
 import { useRouter } from "next/router";
 
 
@@ -7,13 +8,8 @@ import { useRouter } from "next/router";
 export default function Page() {
 
 
-
-
     return (
-        <div>
-            <h1>Match</h1>
-            
-        </div>
+        <FmField></FmField>
     )
 
 }

@@ -18,6 +18,22 @@
     margin-bottom: 40px;
 }
 
+.fm-lobby-title
+{
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 200 !important;
+
+}
+.fm-lobby-title>h1
+{
+    
+    font-weight: 600 !important;
+
+}
+
+
 .fm-lobby-table-wrapper
 {
     max-height: 80vh;

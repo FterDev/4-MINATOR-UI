@@ -44,7 +44,7 @@ export default function FmLobby(data: FmLobbyProps)
             <Flex className="fm-lobby-options">
                 <FmButton text="Back" className="fm-lobby-button" onClick={()=>{router.push('/game/nav')}}/>
             </Flex>
-            <Flex justify="center">
+            <Flex className="fm-lobby-title" justify="center">
                 <h1>Available Players:</h1>
             </Flex>
             <div className="fm-lobby-table-wrapper">

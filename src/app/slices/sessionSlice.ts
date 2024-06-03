@@ -8,6 +8,7 @@ interface SessionState {
     nickname: string | null;
     email: string | null;
     picture: string | null;
+    matchId: any | null;
 }
 
 
@@ -16,7 +17,8 @@ const initialState: SessionState = {
     token: null,
     nickname: null,
     email: null,
-    picture: null
+    picture: null,
+    matchId: null
 };
 
 export const sessionSlice = createSlice({
@@ -39,10 +41,13 @@ export const sessionSlice = createSlice({
         },
         setNickname(state, action) {
             state.nickname = action.payload;
+        },
+        setMatchId(state, action) {
+            state.matchId = action.payload;
         }
     }
 });
 
 
-export const { setSession, clearSession, setNickname } = sessionSlice.actions;
+export const { setSession, clearSession, setNickname, setMatchId } = sessionSlice.actions;
 export default sessionSlice.reducer;

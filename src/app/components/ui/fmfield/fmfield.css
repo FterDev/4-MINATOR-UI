@@ -1,5 +1,8 @@
 
 
+
+
+
 .fm-field-card
 {
     width: 80%;
@@ -29,11 +32,12 @@
 .fm-field-main
 {
     width: 100%;
+    --profile-image-size: 100px;
 }
 
 .fm-field-game
 {
-    width: 80%!important;
+    width: 60%;
 }
 
 .fm-field-header
@@ -51,9 +55,34 @@
 
 .fm-field-player
 {
-    width: 10% !important;
+    width: auto;
+    padding: 25px;
 }
 
+.fm-field-player>img
+{
+    height: var(--profile-image-size);
+    width: var(--profile-image-size);
+    border-radius: 50%;
+   
+}
+
+.fm-field-player>label
+{
+    font-size: 1.25em;
+    margin-top: 10px;
+}
+
+
+.fm-field-player-yellow
+{
+    border: 3px solid #FFCC00;
+}
+
+.fm-field-player-red
+{
+    border: 3px solid #FE0031;
+}
 
 .fm-field-col
 {

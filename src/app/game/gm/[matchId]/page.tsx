@@ -5,11 +5,12 @@ import { useRouter } from "next/router";
 
 
 
-export default function Page() {
+export default function Page({ params }: { params: { matchId: string } }) {
 
+    
 
     return (
-        <FmField></FmField>
+        <FmField matchId={params.matchId}></FmField>
     )
 
 }

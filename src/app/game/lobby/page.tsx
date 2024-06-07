@@ -118,7 +118,6 @@ export default function Lobby()
     return (
         <>
         <FmLobby data={players} requestMatch={requestMatch} />  
-        <p>{matchData&& matchData.id}</p>
         <FmNotification show={modal}>
             {waitingResponse && <FmAwaitingResponse playerNickname={targetPlayer.nickname} playerExternalId={targetPlayer.externalId} awaitingResponse cancelMethod={cancelMatch} acceptMethod={ () => {}} ></FmAwaitingResponse>}
             {requestingMatch && <FmAwaitingResponse playerNickname={requester.nickname} playerExternalId={requester.externalId} awaitingResponse={false} cancelMethod={cancelMatch} acceptMethod={acceptMatch}></FmAwaitingResponse>}

@@ -15,7 +15,7 @@ export default function FmField(fieldProps : FmFieldProps)
     const cols = 7;
     const rows = 6;
     
-    const [fieldState, setFieldState] = useState(new Array(rows).fill(new Array(cols).fill(0)));
+    const [fieldState, setFieldState] = useState(new Array(cols).fill(new Array(rows).fill(0)));
 
 
     return(
@@ -30,15 +30,28 @@ export default function FmField(fieldProps : FmFieldProps)
                     <FmButton className='fm-field-button' text={'Leave Game'} color='danger'></FmButton>
                 </Flex>
                 <Flex className='fm-field-main'>
-                    <div>
-                        playerdata1
-                    </div>
-                    <div>
-                        stones
-                    </div>
-                    <div>
-                        playerdata2
-                    </div>
+                    <Flex className='fm-field-player'>
+                        playerdata 1
+                    </Flex>
+                    <Flex className='fm-field-game' align='center' justify='center'>
+                        {fieldState.map((col, colIndex) => {
+                            return (
+                                <Flex vertical key={colIndex}>
+                                    {col.map((row:number, rowIndex:number) => {
+                                        return (
+                                            <Flex key={rowIndex} className='fm-field-cell'>
+                                                {row}
+                                            </Flex>
+                                        )
+                                    })}
+                                </Flex>
+                            )
+                        }
+                        )}
+                    </Flex>
+                    <Flex className='fm-field-player'>
+                        playerdata 2
+                    </Flex>
                 </Flex>
                 <Flex className='fm-field-header' justify='center' align='center'>
                     <FmButton className='fm-field-button' text={'Joker (2x)'} />

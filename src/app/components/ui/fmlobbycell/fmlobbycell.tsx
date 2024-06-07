@@ -44,7 +44,7 @@ export const FmLobbyCell: React.FC<FmLobbyCellProps> = ({externalId, nickname, p
         <Flex key={playerId} className="fm-lobbycell" align="center" justify="space-between">
             <span>{picloading ? <LoadingOutlined/> : <Image src={profilePic} alt="logo" width={75} height={75} sizes="100vw" className="fm-lobbycell-profilepic" />}</span>
             <span>{nickname}</span>
-            <span>{(externalId == sessionData.userId) ? <label>YOU</label> : <FmButton text={<PlayCircleFilled/>} onClick={()=>request(playerId)} />}</span>
+            <span>{(externalId == sessionData.userId) ? <label className="fm-lobbycell-own">YOU</label> : <FmButton text={<PlayCircleFilled/>} onClick={()=>request(playerId)} />}</span>
         </Flex>
     );
 }

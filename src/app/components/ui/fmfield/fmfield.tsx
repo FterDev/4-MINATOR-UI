@@ -4,6 +4,7 @@ import FmCard from '../fmcard/fmcard';
 import './fmfield.css';
 import FmButton from '../fmbutton/fmbutton';
 import { useState } from 'react';
+import FmStonePosition from '../fmstoneposition/fmstoneposition';
 
 interface FmFieldProps {
 
@@ -12,9 +13,12 @@ interface FmFieldProps {
 export default function FmField(fieldProps : FmFieldProps)
 {
 
-    const cols = 7;
+    const cols = 7; 
     const rows = 6;
     
+
+    // 0 = empty / -1 = red / 1 = yellow
+
     const [fieldState, setFieldState] = useState(new Array(cols).fill(new Array(rows).fill(0)));
 
 
@@ -36,12 +40,10 @@ export default function FmField(fieldProps : FmFieldProps)
                     <Flex className='fm-field-game' align='center' justify='center'>
                         {fieldState.map((col, colIndex) => {
                             return (
-                                <Flex vertical key={colIndex}>
+                                <Flex vertical key={colIndex} className='fm-field-col'>
                                     {col.map((row:number, rowIndex:number) => {
                                         return (
-                                            <Flex key={rowIndex} className='fm-field-cell'>
-                                                {row}
-                                            </Flex>
+                                            <FmStonePosition key={rowIndex} color={row} />
                                         )
                                     })}
                                 </Flex>

@@ -1,0 +1,34 @@
+
+.fm-stone-position
+{
+    --size: 75px;
+    width: var(--size);
+    height: var(--size);
+    margin-bottom: 25px;
+    background-color: #ffffff10;
+    border-radius: 50%;
+    -webkit-box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+    box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+}
+
+.fm-stone-position>label
+{
+    visibility: hidden;
+}
+
+
+.fm-stone-color-0
+{
+    background-color: #ffffff10;
+}
+
+.fm-stone-color-1
+{
+    background-color: #FFCC00;
+}
+
+.fm-stone-color--1
+{
+    background-color: #FE0031;
+}

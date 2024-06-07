@@ -54,3 +54,13 @@
     width: 10% !important;
 }
 
+
+.fm-field-col
+{
+   padding: 6px;
+}
+
+.fm-field-col:hover
+{
+   background-color: #ffffff10;
+}

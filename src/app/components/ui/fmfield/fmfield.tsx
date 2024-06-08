@@ -20,6 +20,8 @@ interface FmFieldProps {
 
 
 
+
+
 export default function FmField(fieldProps : FmFieldProps)
 {
 
@@ -42,9 +44,32 @@ export default function FmField(fieldProps : FmFieldProps)
     const [opponentPlayer, setOpponentPlayer] = useState<any>(null);
 
 
-    const currentPlayerColor = matchData?.playerRed.id === currentPlayer?.id ? 'red' : 'yellow';
-    const opponentPlayerColor = matchData?.playerRed.id === opponentPlayer?.id ? 'red' : 'yellow'
+    const [playerTurn, setPlayerTurn] = useState<number>(0);
+    const [winner, setWinner] = useState<number>(0);
 
+
+
+    const currentPlayerColor = matchData?.playerRed.id === currentPlayer?.id ? -1 : 1;
+    const opponentPlayerColor = matchData?.playerRed.id === opponentPlayer?.id ? -1 : 1;
+
+
+    async function sendMove(move: number)
+    {
+        var matchId = fieldProps.matchId;
+        await connection?.invoke("MakeMove", move, matchId).catch((err) => console.log(err));
+    }
+
+
+
+    if(winner != 0)
+    {
+        if(currentPlayer || opponentPlayer)
+        {
+            var winnerName = winner == currentPlayerColor ? currentPlayer.user.nickname : opponentPlayer.user.nickname;
+            setTimeout(() => {}, 1000); 
+            alert('Winner is ' + winnerName);
+        }
+    }
     
 
     useEffect(() => {
@@ -80,7 +105,24 @@ export default function FmField(fieldProps : FmFieldProps)
                 
             });
 
+            connect.on('ReceiveGameBoard', (gameBoard) => {
+                var gameBoard = JSON.parse(gameBoard);
+             
+                setPlayerTurn(gameBoard.CurrentPlayer);
+                setFieldState(gameBoard.Board);
+                if(gameBoard.Winner != 0)
+                {
+                    setWinner(gameBoard.Winner);
+                }
+
+         
+                
+            });
+
+            console.log(fieldProps.matchId);
+
             connect.invoke("JoinMatch", fieldProps.matchId).catch((err) => console.log(err));
+            connect.invoke("GetGameBoard", fieldProps.matchId).catch((err) => console.log(err));
 
             setLoading(false);
 
@@ -111,7 +153,7 @@ export default function FmField(fieldProps : FmFieldProps)
                 </Flex>
                 <Flex className='fm-field-main' justify='center'>
                     <Flex className='fm-field-player' vertical align='center'>
-                        <Image className={`fm-field-player-${currentPlayerColor}`} src={currentPlayerAvatar} alt='logo' width={0} height={0} sizes='100vw'  />
+                        <Image className={`fm-field-player-${currentPlayerColor == -1 ? 'red' : 'yellow'} ${playerTurn == currentPlayerColor ? 'active' : ''} `} src={currentPlayerAvatar} alt='logo' width={0} height={0} sizes='100vw'  />
                         <label>
                             {currentPlayer?.user.nickname}
                         </label>
@@ -120,7 +162,7 @@ export default function FmField(fieldProps : FmFieldProps)
                     <Flex className='fm-field-game' align='center' justify='center'>
                         {fieldState.map((col, colIndex) => {
                             return (
-                                <Flex vertical key={colIndex} className='fm-field-col'>
+                                <Flex vertical key={colIndex} className={`fm-field-col ${playerTurn == currentPlayerColor ? 'col-active' : ''}` } onClick={playerTurn == currentPlayerColor ? () => sendMove(colIndex) : ()=>{}}> 
                                     {col.map((row:number, rowIndex:number) => {
                                         return (
                                             <FmStonePosition key={rowIndex} color={row} />
@@ -132,7 +174,7 @@ export default function FmField(fieldProps : FmFieldProps)
                         )}
                     </Flex>
                     <Flex className='fm-field-player' vertical align='center'>
-                        <Image className={`fm-field-player-${opponentPlayerColor}`} src={opponentPlayerAvatar} alt='logo' width={0} height={0} sizes='100vw'  />
+                        <Image className={`fm-field-player-${opponentPlayerColor == -1 ? 'red' : 'yellow'} ${playerTurn != currentPlayerColor ? 'active' : ''}`} src={opponentPlayerAvatar} alt='logo' width={0} height={0} sizes='100vw'  />
                         <label>
                             {opponentPlayer?.user.nickname}
                         </label>

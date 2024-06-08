@@ -4,8 +4,6 @@ import FmLobby from "@/app/components/ui/fmlobby/fmlobby";
 import FmNotification from "@/app/components/ui/fmnotification/fmnotification";
 import { setMatchId } from "@/app/slices/sessionSlice";
 import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { Modal } from "antd";
-import { set } from "firebase/database";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
@@ -108,7 +106,12 @@ export default function Lobby()
         return () => {
             if (connection) {
                 connection.off("ReceiveWaitingPlayers");
-                
+                connection.off("ReceiveMatchRequest");
+                connection.off("ReceiveTargetUser");
+                connection.off("ReceivePendingMatch");
+                connection.off("ReceiveMatchCanceled");
+                connection.off("ReceiveMatchAccepted");
+                connection.stop();
             }
         }
         

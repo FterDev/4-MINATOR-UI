@@ -26,9 +26,15 @@
 .fm-stone-color-1
 {
     background-color: #FFCC00;
+    -webkit-box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+    box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
 }
 
 .fm-stone-color--1
 {
     background-color: #FE0031;
+    -webkit-box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
+    box-shadow: inset -20px 35px 50px -65px rgba(0,0,0,0.75);
 }

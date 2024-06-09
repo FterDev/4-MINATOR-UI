@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 import { getProfilePicture } from '@/app/services/firefs';
 import Image from 'next/image';
 import FmLoading from '../fmloading/fmloading';
+import { set } from 'firebase/database';
+import FmWinLoseMessage from '../fmwinnlosemessage/fmwinlosemessage';
 
 
 interface FmFieldProps {
@@ -46,6 +48,8 @@ export default function FmField(fieldProps : FmFieldProps)
 
     const [playerTurn, setPlayerTurn] = useState<number>(0);
     const [winner, setWinner] = useState<number>(0);
+    const [winNotification, setWinNotification] = useState<boolean>(false);
+    const [winState , setWinState] = useState<number>(0);
 
 
 
@@ -61,15 +65,7 @@ export default function FmField(fieldProps : FmFieldProps)
 
 
 
-    if(winner != 0)
-    {
-        if(currentPlayer || opponentPlayer)
-        {
-            var winnerName = winner == currentPlayerColor ? currentPlayer.user.nickname : opponentPlayer.user.nickname;
-            setTimeout(() => {}, 1000); 
-            alert('Winner is ' + winnerName);
-        }
-    }
+ 
     
 
     useEffect(() => {
@@ -113,6 +109,8 @@ export default function FmField(fieldProps : FmFieldProps)
                 if(gameBoard.Winner != 0)
                 {
                     setWinner(gameBoard.Winner);
+                    setTimeout(() => {}, 2000); 
+                    setWinNotification(true);
                 }
 
          
@@ -140,7 +138,7 @@ export default function FmField(fieldProps : FmFieldProps)
     }, []);
 
     return(
-        loading ? <FmLoading/> :
+        <>
         <FmCard className='fm-field-card'>
             <Flex vertical>
                 <Flex justify='space-evenly' className='fm-field-header'>
@@ -185,5 +183,7 @@ export default function FmField(fieldProps : FmFieldProps)
                 </Flex>
             </Flex>
         </FmCard>
+        {winNotification && <FmWinLoseMessage winner={winner == currentPlayerColor ? 1 : 0}></FmWinLoseMessage>}
+        </>
     )
 }

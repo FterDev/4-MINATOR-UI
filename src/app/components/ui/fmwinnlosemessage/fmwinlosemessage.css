@@ -1,0 +1,41 @@
+
+
+
+.fm-winlose-container
+{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000099;
+}
+
+.fm-winlose-card
+{
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.fm-winlose-message>label
+{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.fm-winlose-message>img
+{
+    margin-bottom: 15px;
+}
+
+.fm-winlose-button
+{
+    margin-top: 15px;
+}

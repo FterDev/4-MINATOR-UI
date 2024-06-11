@@ -15,6 +15,7 @@ import FmAwaitingResponse from "../fmawaitingresponse/fmawaitingresponse";
 import FmLoading from "../fmloading/fmloading";
 import { FmModal } from "../fmmodal/fmmodal";
 import { LoadingOutlined } from "@ant-design/icons";
+import FmSelector, { FmSelectorOptions } from "../fmselector/fmselector";
 
 export default function FmLobby()
 {
@@ -39,6 +40,16 @@ export default function FmLobby()
     const [requester, setRequester] = useState<any>(null);
     const [targetPlayer, setTargetPlayer] = useState<any>(null);
 
+    const botLevels: FmSelectorOptions[] = [
+        {key: 0, value: "Easy"},
+        {key: 1, value: "Medium"},
+        {key: 2, value: "Hard"}
+    ];
+
+    const [selectedBotLevel, setSelectedBotLevel] = useState<number>(0);
+
+    
+
 
     const backendUrl = process.env.NEXT_PUBLIC_LINK_BACKEND;
 
@@ -61,6 +72,12 @@ export default function FmLobby()
     function openBotLevelWindow()
     {
         setBotLevelWindow(true);
+    }
+
+    function showBotLevel()
+    {
+        window.alert("Bot Level: " + selectedBotLevel);
+    
     }
 
 
@@ -136,38 +153,43 @@ export default function FmLobby()
 
     return(
         <> 
-        <Flex justify="center">
-            <FmCard className="fm-lobby-card">
-                <Flex className="fm-lobby-options">
-                    <FmButton text="Back" className="fm-lobby-button" onClick={()=>{router.push('/game/nav')}}/>
+            <Flex justify="center">
+                <FmCard className="fm-lobby-card">
+                    <Flex className="fm-lobby-options">
+                        <FmButton text="Back" className="fm-lobby-button" onClick={()=>{router.push('/game/nav')}}/>
+                    </Flex>
+                    <Flex className="fm-lobby-title" justify="center">
+                        <h1>Available Bots:</h1>
+                    </Flex>
+                    <div className="fm-lobby-table-wrapper">
+                        <FmLobbyCell externalId='dyeh9EByFNfR8qqQEqTz92af0kQ2' nickname='T-800' playerId={800} request={openBotLevelWindow} />
+                    </div>
+                    <Flex className="fm-lobby-title" justify="center">
+                        <h1>Available Players:</h1>
+                    </Flex>
+                    <div className="fm-lobby-table-wrapper">
+                        {players == undefined ? <LoadingOutlined /> :
+                        players.map((player: any) => {
+                            console.log(player);
+                            return <FmLobbyCell externalId={player.user.externalId} nickname={player.user.nickname} playerId={player.id} request={requestMatch} />
+                        })}
+                    </div> 
+                </FmCard>
+            </Flex>
+            
+            
+            <FmNotification show={modal}>
+                {waitingResponse && <FmAwaitingResponse playerNickname={targetPlayer.nickname} playerExternalId={targetPlayer.externalId} awaitingResponse cancelMethod={cancelMatch} acceptMethod={ () => {}} ></FmAwaitingResponse>}
+                {requestingMatch && <FmAwaitingResponse playerNickname={requester.nickname} playerExternalId={requester.externalId} awaitingResponse={false} cancelMethod={cancelMatch} acceptMethod={acceptMatch}></FmAwaitingResponse>}
+            </FmNotification>
+            <FmModal visible={botLevelWindow} textOk='Play' onCancel={()=>{setBotLevelWindow(false)}} onOk={() => {showBotLevel}}>
+                <Flex vertical align="center" justify="center">
+                    <h3>Select Bot Level:</h3>
+                    <FmSelector options={botLevels} selected={selectedBotLevel} onSelect={(key) => {setSelectedBotLevel(key)}}>
+
+                    </FmSelector>
                 </Flex>
-                <Flex className="fm-lobby-title" justify="center">
-                    <h1>Available Bots:</h1>
-                </Flex>
-                <div className="fm-lobby-table-wrapper">
-                    <FmLobbyCell externalId='dyeh9EByFNfR8qqQEqTz92af0kQ2' nickname='T-800' playerId={800} request={openBotLevelWindow} />
-                </div>
-                <Flex className="fm-lobby-title" justify="center">
-                    <h1>Available Players:</h1>
-                </Flex>
-                <div className="fm-lobby-table-wrapper">
-                    {players == undefined ? <LoadingOutlined /> :
-                    players.map((player: any) => {
-                        console.log(player);
-                        return <FmLobbyCell externalId={player.user.externalId} nickname={player.user.nickname} playerId={player.id} request={requestMatch} />
-                    })}
-                </div> 
-            </FmCard>
-        </Flex>
-           
-        
-        <FmNotification show={modal}>
-            {waitingResponse && <FmAwaitingResponse playerNickname={targetPlayer.nickname} playerExternalId={targetPlayer.externalId} awaitingResponse cancelMethod={cancelMatch} acceptMethod={ () => {}} ></FmAwaitingResponse>}
-            {requestingMatch && <FmAwaitingResponse playerNickname={requester.nickname} playerExternalId={requester.externalId} awaitingResponse={false} cancelMethod={cancelMatch} acceptMethod={acceptMatch}></FmAwaitingResponse>}
-        </FmNotification>
-        <FmModal visible={botLevelWindow} textOk='Play' onCancel={()=>{setBotLevelWindow(false)}} onOk={() => {}}>
-            hello
-        </FmModal>
+            </FmModal>
         </>
     )
 }

@@ -29,7 +29,8 @@
 .fm-lobby-title>h1
 {
     
-    font-weight: 600 !important;
+    font-weight: 400 !important;
+    font-size: 1.25em;
 
 }
 

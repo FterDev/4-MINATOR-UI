@@ -3,9 +3,6 @@ import { Flex } from "antd";
 import { use, useEffect, useState } from "react";
 import FmButton from "../fmbutton/fmbutton";
 import { LoadingOutlined, PlayCircleFilled } from "@ant-design/icons";
-import { doc, getDoc } from "firebase/firestore";
-import { db, storage } from "@/app/firebase";
-import { getDownloadURL, ref } from "firebase/storage";
 import Image from "next/image";
 import './fmlobbycell.css';
 import { useSelector } from "react-redux";
@@ -17,7 +14,7 @@ interface FmLobbyCellProps {
     externalId: string;
     nickname: string;
     playerId: number;
-    request: (playerId: number) => void;
+    request: (playerId?: any) => void;
 }
 
 

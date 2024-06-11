@@ -1,0 +1,41 @@
+
+
+.fm-modal
+{
+    visibility: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000099;
+    transition: opacity 0.25s ease;
+    opacity: 0;
+}
+
+.visible
+{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+
+.fm-modal-buttons
+{
+    margin-top: 15px;
+}
+
+.fm-modal-card
+{
+    background-color: #97979799;
+}
+
+.fm-modal-buttons>button
+{
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 150px;
+    min-height: 45px !important;
+    max-height: 45px !important;
+    padding: auto !important;
+}

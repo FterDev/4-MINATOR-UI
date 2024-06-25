@@ -60,11 +60,12 @@ export default function FmField(fieldProps : FmFieldProps)
     async function sendMove(move: number)
     {
         var matchId = fieldProps.matchId;
-        await connection?.invoke("MakeMove", move, matchId).catch((err) => console.log(err));
+        var opponentPlayerBot = opponentPlayer.isBot;
+        await connection?.invoke("MakeMove", move, matchId, opponentPlayerBot   ).catch((err) => console.log(err));
     }
 
 
-
+    console.log(opponentPlayer);
  
     
 
@@ -164,7 +165,7 @@ export default function FmField(fieldProps : FmFieldProps)
                                     {col.map((row:number, rowIndex:number) => {
                                         return (
                                             <FmStonePosition key={rowIndex} color={row} />
-                                        )
+                                            )
                                     })}
                                 </Flex>
                             )

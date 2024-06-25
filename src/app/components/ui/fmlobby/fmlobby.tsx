@@ -59,6 +59,12 @@ export default function FmLobby()
         connection?.invoke("RequestMatch", playerId).catch((err) => console.log(err));
     }
 
+
+    async function requestBotMatch()
+    {
+        connection?.invoke("RequestMatchBot", selectedBotLevel).catch((err) => console.log(err));
+    }
+
     async function cancelMatch()
     {
         connection?.invoke("CancelMatch", matchData.id).catch((err) => console.log(err));
@@ -76,7 +82,7 @@ export default function FmLobby()
 
     function showBotLevel()
     {
-        window.alert("Bot Level: " + selectedBotLevel);
+        console.log(selectedBotLevel);
     
     }
 
@@ -182,7 +188,7 @@ export default function FmLobby()
                 {waitingResponse && <FmAwaitingResponse playerNickname={targetPlayer.nickname} playerExternalId={targetPlayer.externalId} awaitingResponse cancelMethod={cancelMatch} acceptMethod={ () => {}} ></FmAwaitingResponse>}
                 {requestingMatch && <FmAwaitingResponse playerNickname={requester.nickname} playerExternalId={requester.externalId} awaitingResponse={false} cancelMethod={cancelMatch} acceptMethod={acceptMatch}></FmAwaitingResponse>}
             </FmNotification>
-            <FmModal visible={botLevelWindow} textOk='Play' onCancel={()=>{setBotLevelWindow(false)}} onOk={() => {showBotLevel}}>
+            <FmModal visible={botLevelWindow} textOk='Play' onCancel={()=>{setBotLevelWindow(false)}} onOk={() => {requestBotMatch()}}>
                 <Flex vertical align="center" justify="center">
                     <h3>Select Bot Level:</h3>
                     <FmSelector options={botLevels} selected={selectedBotLevel} onSelect={(key) => {setSelectedBotLevel(key)}}>

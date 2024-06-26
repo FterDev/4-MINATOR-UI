@@ -12,7 +12,8 @@ import { redirect } from "next/navigation";
 import { EditAttributesOutlined, SignalWifi0BarRounded, SignalWifiStatusbar4Bar } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import { set } from 'firebase/database';
+
+import { useRouter } from 'next/navigation';
 
 
 
@@ -50,6 +51,8 @@ export default function Robots()
     const [data, setData] = useState<Robot[]>([]);
     const [connection, setConnection] = useState<HubConnection | null>(null);
 
+    const router = useRouter();
+
     
     
 
@@ -84,7 +87,11 @@ export default function Robots()
     return (
         <>
             <FmCard className="robots">
-                <Flex>
+                <Flex align='center' justify='space-between'>
+                    <FmButton text={'Back'} onClick={() => {router.push("/game/nav")}} />
+                    <FmButton text={'Add'} onClick={() => {router.push("robots/new")}} />
+                </Flex>
+                <Flex className='table'>
                     <FmTable columns={columns} data={data} />
                 </Flex>
             </FmCard>

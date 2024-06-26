@@ -1,14 +1,10 @@
-
-
-
+import RobotForm from "@/app/components/app/robots/robotform/robotform";
 
 
 
 export default function Robot()
 {
     return (
-        <div>
-            <h1>Robot</h1>
-        </div>
+        <RobotForm />
     );
 }

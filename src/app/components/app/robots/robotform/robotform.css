@@ -1,0 +1,13 @@
+.robot-form-card
+{
+    width: 60%;
+    margin: 0px auto;
+    margin-top: 2.5%;
+    padding: 40px 60px;
+}
+
+.robot-form-button
+{
+    margin: 25px 10px;
+    width: 100px;
+}

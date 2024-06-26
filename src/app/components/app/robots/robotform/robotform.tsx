@@ -6,15 +6,24 @@ import { Flex } from 'antd';
 import FmInput from '@/app/components/ui/fminput/fminput';
 import FmButton from '@/app/components/ui/fmbutton/fmbutton';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { HubConnection } from '@microsoft/signalr';
+
+export interface RobotFormProps {
+    robotConnection : HubConnection | null;
+}
 
 
-export default function RobotForm()
+export default function RobotForm(robotConnection : RobotFormProps)
 {
 
     const router = useRouter();
+    const connection = robotConnection;
+
+    const [robotName, setRobotName] = useState<string>('');
 
     return (
-        <FmCard className='robot-form-card'>
+        <>
             <Flex justify='center'>
                 <h3>title stuff</h3>
             </Flex>
@@ -22,10 +31,6 @@ export default function RobotForm()
                 <FmInput id='robotname' name='robotname' value="" textAlign='center' placeholder='T-800' onChange={() => {}}  title='Robot Name' />
                 <FmInput id='robotpassword' name='robotpassword' value="" textAlign='center' placeholder='●●●●●' onChange={() => {}} type='password'  title='Robot Password' />
             </Flex>
-            <Flex justify='center'>
-                <FmButton className='robot-form-button' text="Cancel" color="danger" onClick={() => {router.push('/game/robots')}} />
-                <FmButton className='robot-form-button' text="Save" onClick={() => {}} />
-            </Flex>
-        </FmCard>
+        </>
     );
 }

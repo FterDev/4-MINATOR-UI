@@ -14,6 +14,8 @@ import { useEffect, useState } from 'react';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 import { useRouter } from 'next/navigation';
+import { FmModal } from '@/app/components/ui/fmmodal/fmmodal';
+import RobotForm from '@/app/components/app/robots/robotform/robotform';
 
 
 
@@ -48,8 +50,12 @@ export default function Robots()
         status: number;
     }
 
+
+    
+
     const [data, setData] = useState<Robot[]>([]);
     const [connection, setConnection] = useState<HubConnection | null>(null);
+    const [robotFormVisible, setRobotFormVisible] = useState<boolean>(false);
 
     const router = useRouter();
 
@@ -89,12 +95,15 @@ export default function Robots()
             <FmCard className="robots">
                 <Flex align='center' justify='space-between'>
                     <FmButton text={'Back'} onClick={() => {router.push("/game/nav")}} />
-                    <FmButton text={'Add'} onClick={() => {router.push("robots/new")}} />
+                    <FmButton text={'Add'} onClick={() => {setRobotFormVisible(true)}} />
                 </Flex>
                 <Flex className='table'>
                     <FmTable columns={columns} data={data} />
                 </Flex>
             </FmCard>
+            <FmModal visible={robotFormVisible} onCancel={() => {setRobotFormVisible(false)}} onOk={() => {}} >
+                <RobotForm robotConnection={connection} />
+            </FmModal>
         </>
     );
 }

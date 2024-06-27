@@ -4,7 +4,7 @@ import { Flex } from 'antd';
 import Image from 'next/image';
 import FmButton from '../fmbutton/fmbutton';
 import FmNavButtonContent from '../fmnavbuttoncontent/fmnavbuttoncontent';
-import { PoweroffOutlined, RobotFilled } from '@ant-design/icons';
+import { PoweroffOutlined, RobotFilled, SettingOutlined, TrophyOutlined } from '@ant-design/icons';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -34,10 +34,16 @@ let FmNavigation: React.FC<FmNavigationProps> = (props) => {
                 <Flex className='fm-navigation-body' vertical justify='center'>
                     <FmButton text={
                         <FmNavButtonContent text='Play' icon={<Image src='/img/logo_transparent.png' alt='play' width={0} height={0} sizes='100vw' className='fm-navigation-button-logo'/>}/>                        
-                    } className='fm-navigation-button'/>
-                    <FmButton text={
-                        <FmNavButtonContent text='Edit Robots' icon={<RobotFilled className='fm-navigation-button-icon'/>} />                        
-                    } className='fm-navigation-button' onClick={() => router.push("/game/robots")} />
+                    } className='fm-navigation-button' onClick={() => router.push("/game/lobby")}/>
+                    
+                    <Flex justify='space-between'>
+                        <FmButton color='primary' text={
+                            <FmNavButtonContent text='Leaderboard' icon={<TrophyOutlined className='fm-navigation-button-icon' />}/>                        
+                        } className='fm-navigation-button' onClick={() => {}} />
+                        <FmButton color='primary' text={
+                            <FmNavButtonContent text='Settings' icon={<SettingOutlined className='fm-navigation-button-icon' />}/>                        
+                        } className='fm-navigation-button' onClick={() => {}} />
+                    </Flex>
 
                     <FmButton color='secondary' text={
                         <FmNavButtonContent text='Sign out' icon={<PoweroffOutlined className='fm-navigation-button-icon' />}/>                        

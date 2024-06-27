@@ -1,26 +1,30 @@
 
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyA4usyB-fazYHROgvLFqIRQ6pyt7FsS0hk",
-  authDomain: process.env.FB_AUTHDOMAIN,
-  projectId: process.env.FB_PROJECTID,
-  storageBucket: process.env.FB_STORAGE,
-  messagingSenderId: process.env.FB_MESSAGINGSENDERID,
-  appId: process.env.FB_APPID,
-  measurementId: process.env.FB_MEASUREMENTID,
-  
+  apiKey: process.env.NEXT_PUBLIC_FB_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_FB_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FB_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FB_STORAGE,
+  messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_FB_APPID,
+  measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMENTID,
 };
 
 
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getFirestore();
+const db = getFirestore(app);
+const storage = getStorage();
+
+ 
 
 
 
-export { app, db, auth };
+export { app, db, storage, auth };

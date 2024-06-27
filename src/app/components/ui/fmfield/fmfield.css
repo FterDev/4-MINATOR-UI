@@ -1,0 +1,102 @@
+
+
+
+
+
+.fm-field-card
+{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    margin-top: 2.5%;
+    padding: 0;
+}
+
+.fm-field-button
+{
+    min-width: 150px;
+    max-width: 150px;
+
+    min-height: 40px !important;
+    min-height: 40px !important;
+
+    font-size: 1em !important;
+    padding: 10px !important;
+}
+
+.fm-field-header
+{
+    padding: 20px 40px !important;
+}
+
+.fm-field-main
+{
+    width: 100%;
+    --profile-image-size: 100px;
+}
+
+.fm-field-game
+{
+    width: 60%;
+}
+
+.fm-field-header
+{
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.fm-field-main
+{
+    padding: 40px 0px;
+    width: 100%;
+    background-color: #ffffff10;
+}
+
+.fm-field-player
+{
+    width: auto;
+    padding: 25px;
+}
+
+.fm-field-player>img
+{
+    height: var(--profile-image-size);
+    width: var(--profile-image-size);
+    border-radius: 50%;
+   
+}
+
+.fm-field-player>label
+{
+    font-size: 1.25em;
+    margin-top: 10px;
+}
+
+
+.fm-field-player-yellow
+{
+    border: 3px solid #FFCC00;
+}
+
+.fm-field-player-red
+{
+    border: 3px solid #FE0031;
+}
+
+.fm-field-col
+{
+   padding: 6px;
+}
+
+.col-active:hover
+{
+   background-color: #ffffff10;
+}
+
+.active
+{
+    -webkit-box-shadow: 0px 0px 56px 3px rgba(255,255,255,1);
+    -moz-box-shadow: 0px 0px 56px 3px rgba(255,255,255,1);
+    box-shadow: 0px 0px 56px 3px rgba(255,255,255,1);
+}

@@ -8,7 +8,7 @@ export default class EmailValidationProvider
 {
     validateEmail(email:string | undefined):ValidationErrorResponse
     {
-        if(email === "" || email == null)
+        if(email === "" || email === null || email === undefined)
         {
             return {errorText: "E-mail is required!", isErrored: true};
         }

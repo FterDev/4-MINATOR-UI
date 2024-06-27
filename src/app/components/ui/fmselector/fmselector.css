@@ -1,0 +1,22 @@
+
+
+.fm-selector
+{
+    width: 100%;
+    height: 60px;
+    background-color: transparent;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: 1px solid var(--input-border);
+    font: 1.2em sans-serif;
+    transition: all 0.3s;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.fm-selector>option
+{
+    background-color: #ffffff10;
+    color: black;
+}

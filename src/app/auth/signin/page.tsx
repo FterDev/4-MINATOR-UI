@@ -7,7 +7,9 @@ import FmButton from "@/app/components/ui/fmbutton/fmbutton";
 import FmInput from "@/app/components/ui/fminput/fminput";
 import FmLink from '@/app/components/ui/fmlink/fmlink';
 import { LoadingOutlined } from "@ant-design/icons";
+import { set } from "firebase/database";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
@@ -38,12 +40,14 @@ export default function SignIn()
     );
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>();
+    const [password, setPassword] = useState<string>();
 
 
     const emailValidation = new EmailValidationProvider();
     const passwordValidation = new PasswordValidationProvider(null);
+
+    const router = useRouter();
 
     function checkAllInputs() {
         setEmailError(emailValidation.validateEmail(email));
@@ -63,9 +67,24 @@ export default function SignIn()
         checkAllInputs();
         
             if (!error) {
-                signIn('credentials', {email: email, password: password, redirect: true, callbackUrl: '/game/nav'}).then((response) => {
-                    console.log(response);
+                signIn('credentials', {email: email, password: password, redirect: false}).then((response) => {
                     setLoading(false);
+                    if(response?.status == 401)
+                    {
+                        setEmailError({errorText: "Wrong e-mail or password!", isErrored: true});
+                        setPasswordError({errorText: "", isErrored: true});
+                        return;
+                    }
+
+                    if(response?.status != 200)
+                    {
+                        window.alert(`Something went wrong :( \n ${response?.status}`)
+                        return;
+                    }
+ 
+                    setLoading(true);
+                    router.push('/game/nav');
+                    
                 });
             }
 

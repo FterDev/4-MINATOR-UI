@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "./sessionprovider";
+import { Provider } from "react-redux";
+import rootRedux from "./store";
 
 const montserrat = Montserrat({
   subsets: ["latin-ext"]

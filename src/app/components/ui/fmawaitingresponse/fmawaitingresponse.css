@@ -1,0 +1,49 @@
+
+.fm-awaiting-response
+{
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 2.5%;
+    background-color: rgba(0, 0, 0, 0.75);
+    
+}
+
+.fm-awaiting-response-profilepic
+{
+    border-radius: 50%;
+    margin-bottom: 5px;
+    height: 50px;
+    width: auto;
+}
+
+.fm-awaiting-vs
+{
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+}
+
+.fm-awaiting-vs>span
+{
+    font-size: 15px;
+    color: #fff;
+    font-weight: 800;
+    
+}
+
+
+.fm-awaiting-response-state
+{
+    margin-top: 15px;
+    font-size: 11px;
+}
+
+.fm-request-button
+{
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 10px !important;
+    font-size: 15px !important;
+    margin: 10px 5px 0px 5px !important;
+}

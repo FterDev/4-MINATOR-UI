@@ -4,36 +4,38 @@ import { redirect } from 'next/navigation';
 import FmNavigation from "@/app/components/ui/fmnavigation/fmnavigation";
 
 import { useSession } from "next-auth/react";
-
-
-
-
-
-
-
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getProfilePicture } from '@/app/services/firefs';
 
 
 
 
 export default  function Nav() {
     
-    const session :any = useSession({
-        required: true,
-        onUnauthenticated() {
-          redirect('/auth/signin');
-        },
-        
-      });
+  const session :any = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect('/auth/signin');
+    }
+  });
 
-
-      console.log(session);
+  const sessionData = useSelector((state: any) => state.session);
       
-      
+    const [picture, setPicture] = useState<string>('');
     
+
+    useEffect(() => {
+      getProfilePicture(sessionData.userId).then((res) => {
+        setPicture(res!);
+      });
+    }, []);
+
+
     return (
       
     
-        <FmNavigation username={session.data?.user?.email} picture="/img/logo_transparent.png" />
+        <FmNavigation username={sessionData.nickname} picture={picture} />
     );
 }
 

@@ -9,7 +9,14 @@ module.exports = {
           port: '',
           pathname: '/avatar/**',
         },
+        {
+          protocol: 'https',
+          hostname: '*.googleapis.com',
+          port: '',
+          pathname: '/**',
+        },
       ],
     },
    
   };
+

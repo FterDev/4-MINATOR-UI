@@ -50,7 +50,9 @@
 {
     overflow: hidden;
     height: 100px;
-    margin-bottom: 15px;
+    margin: 7.5px;
+
+    width: 100%;
 }
 
 .fm-navigation-button-logo

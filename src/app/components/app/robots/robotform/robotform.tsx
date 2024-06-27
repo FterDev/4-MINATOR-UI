@@ -21,6 +21,7 @@ export default function RobotForm(robotConnection : RobotFormProps)
     const connection = robotConnection;
 
     const [robotName, setRobotName] = useState<string>('');
+    const [robotPassword, setRobotPassword] = useState<string>('');
 
     return (
         <>
@@ -28,8 +29,8 @@ export default function RobotForm(robotConnection : RobotFormProps)
                 <h3>title stuff</h3>
             </Flex>
             <Flex justify='space-between' vertical>
-                <FmInput id='robotname' name='robotname' value="" textAlign='center' placeholder='T-800' onChange={() => {}}  title='Robot Name' />
-                <FmInput id='robotpassword' name='robotpassword' value="" textAlign='center' placeholder='●●●●●' onChange={() => {}} type='password'  title='Robot Password' />
+                <FmInput id='robotname' name='robotname' value="" textAlign='center' placeholder='T-800' onChange={(e) => {setRobotName(e)}}  title='Robot Name' />
+                <FmInput id='robotpassword' name='robotpassword' value="" textAlign='center' placeholder='●●●●●' onChange={(e) => {setRobotPassword(e)}} type='password'  title='Robot Password' />
             </Flex>
         </>
     );

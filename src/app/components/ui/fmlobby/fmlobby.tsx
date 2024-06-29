@@ -134,7 +134,7 @@ export default function FmLobby()
                 console.log(res);
                 dispatch(setMatchId(res));
                 connection?.stop();
-                router.push('/game/gm/' + res);
+                router.push('/game/' + res);
             });
 
 

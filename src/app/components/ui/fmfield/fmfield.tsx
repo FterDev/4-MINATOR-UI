@@ -12,6 +12,7 @@ import Image from 'next/image';
 import FmLoading from '../fmloading/fmloading';
 import { set } from 'firebase/database';
 import FmWinLoseMessage from '../fmwinnlosemessage/fmwinlosemessage';
+import { FmTimer } from '../fmtimer/fmtimer';
 
 
 interface FmFieldProps {
@@ -36,6 +37,8 @@ export default function FmField(fieldProps : FmFieldProps)
     const [fieldState, setFieldState] = useState(new Array(cols).fill(new Array(rows).fill(0)));
 
     const [loading, setLoading] = useState<boolean>(true);
+
+    const [timerTime, setTimerTime] = useState<Date>(new Date());
 
     const [connection, setConnection] = useState<HubConnection | null>(null);
     const [matchData, setMatchData] = useState<any>(null);
@@ -82,6 +85,7 @@ export default function FmField(fieldProps : FmFieldProps)
             
             connect.on('ReceiveMatch', (matchData) => {
                 setMatchData(matchData);
+                setTimerTime(new Date(matchData.finishedAt));
                 connect.invoke("GetPlayers", matchData.id).catch((err) => console.log(err));
             });
 
@@ -145,8 +149,7 @@ export default function FmField(fieldProps : FmFieldProps)
                 <Flex justify='space-evenly' className='fm-field-header'>
                     <FmButton className='fm-field-button' text={'Help'}></FmButton>
                     <Flex vertical justify='space-between' className='fm-field-header-status'>
-                        <label>07:59</label>
-                        <label>Hosted by RobotXY</label>
+                        <FmTimer targetTime={timerTime}></FmTimer>
                     </Flex>
                     <FmButton className='fm-field-button' text={'Leave Game'} color='danger'></FmButton>
                 </Flex>

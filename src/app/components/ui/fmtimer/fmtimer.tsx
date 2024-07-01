@@ -33,7 +33,7 @@ export const FmTimer: React.FC<IFmTimerProps> = (props) => {
     }, [props.targetTime]);
 
     return (
-        <div>
+        <div className="fm-timer">
             {timeLeftString}
         </div>
     );

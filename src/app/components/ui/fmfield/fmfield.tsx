@@ -150,7 +150,7 @@ export default function FmField(fieldProps : FmFieldProps)
                     <Flex vertical justify='center' align='center' className='fm-field-header-status'>
                         <FmTimer targetTime={timerTime}></FmTimer>
                     </Flex>
-                    <FmButton className='fm-field-button' text={'Leave Game'} color='danger'></FmButton>
+                    <FmButton className='fm-field-button' text={'Leave Game'} onClick={() => setExitModal(true)} color='danger'></FmButton>
                 </Flex>
                 <Flex className='fm-field-main' justify='center'>
                     <Flex className='fm-field-player' vertical align='center'>
@@ -209,6 +209,9 @@ export default function FmField(fieldProps : FmFieldProps)
                 <b>Draw:</b> If the board is full and no player has connected four discs in a row, the game is a draw.
             </p>
             <br/>
+        </FmModal>
+        <FmModal visible={exitModal} onOk={()=>{setExitModal(false)}} textOk='Stay' textCancel='Leave' onCancel={()=>{setExitModal(false)}}>
+            <h3>Are you sure you want to leave the game?</h3>
         </FmModal>
         {winNotification && <FmWinLoseMessage winner={winner == currentPlayerColor ? 1 : 0}></FmWinLoseMessage>}
         

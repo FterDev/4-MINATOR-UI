@@ -224,7 +224,7 @@ export default function FmField(fieldProps : FmFieldProps)
                 </Flex>
             </Flex>
         </FmCard>
-        <FmModal visible={helpModal} onOk={()=>{setHelpModal(false)}} onCancel={()=>{setHelpModal(false)}}>
+        <FmModal visible={helpModal} hideCancel onOk={()=>{setHelpModal(false)}} onCancel={()=>{setHelpModal(false)}}>
             <h3>Connect 4 Rules</h3>
             <br/><br/>
             <p>

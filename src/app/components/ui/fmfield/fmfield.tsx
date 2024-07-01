@@ -9,8 +9,6 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { useSelector } from 'react-redux';
 import { getProfilePicture } from '@/app/services/firefs';
 import Image from 'next/image';
-import FmLoading from '../fmloading/fmloading';
-import { set } from 'firebase/database';
 import FmWinLoseMessage from '../fmwinnlosemessage/fmwinlosemessage';
 import { FmTimer } from '../fmtimer/fmtimer';
 import { FmModal } from '../fmmodal/fmmodal';
@@ -33,9 +31,13 @@ export default function FmField(fieldProps : FmFieldProps)
     const rows = 6;
 
     const sessionData = useSelector((state: any) => state.session);
+
+    const [loading, setLoading] = useState<boolean>(true);
     
     // 0 = empty / -1 = red / 1 = yellow -> init fill with 0
     const [fieldState, setFieldState] = useState(new Array(cols).fill(new Array(rows).fill(0)));
+    const [moveCounter, setMoveCounter] = useState<number>(0);
+    const [firstMove, setFirstMove] = useState<boolean>(true);
 
     const [timerTime, setTimerTime] = useState<Date>(new Date());
 
@@ -51,7 +53,6 @@ export default function FmField(fieldProps : FmFieldProps)
     const [playerTurn, setPlayerTurn] = useState<number>(0);
     const [winner, setWinner] = useState<number>(0);
     const [winNotification, setWinNotification] = useState<boolean>(false);
-    const [winState , setWinState] = useState<number>(0);
 
     const [helpModal, setHelpModal] = useState<boolean>(false);
     const [exitModal, setExitModal] = useState<boolean>(false);
@@ -65,12 +66,23 @@ export default function FmField(fieldProps : FmFieldProps)
     {
         var matchId = fieldProps.matchId;
         var opponentPlayerBot = opponentPlayer.isBot;
-        await connection?.invoke("MakeMove", move, matchId, opponentPlayerBot   ).catch((err) => console.log(err));
+        await connection?.invoke("MakeMove", move, matchId, opponentPlayerBot, matchData.botLevel).catch((err) => console.log(err));
+    }
+
+    async function sendFirstMove()
+    {
+        var matchId = fieldProps.matchId;
+        if(playerTurn == opponentPlayerColor && opponentPlayer.isBot && moveCounter == 0 && firstMove)
+        {
+            console.log('first move');
+            await connection?.invoke("FirstBotMove",matchId).catch((err) => console.log(err));
+            
+        }
     }
 
 
-    console.log(opponentPlayer);
- 
+    
+
     
 
     useEffect(() => {
@@ -110,7 +122,9 @@ export default function FmField(fieldProps : FmFieldProps)
             connect.on('ReceiveGameBoard', (gameBoard) => {
                 var gameBoard = JSON.parse(gameBoard);
              
+                
                 setPlayerTurn(gameBoard.CurrentPlayer);
+                setMoveCounter(gameBoard.Moves);
                 setFieldState(gameBoard.Board);
                 if(gameBoard.Winner != 0)
                 {
@@ -119,16 +133,20 @@ export default function FmField(fieldProps : FmFieldProps)
                     setWinNotification(true);
                 }
 
-         
+                
                 
             });
 
-            console.log(fieldProps.matchId);
+            
 
             connect.invoke("JoinMatch", fieldProps.matchId).catch((err) => console.log(err));
             connect.invoke("GetGameBoard", fieldProps.matchId).catch((err) => console.log(err));
 
         }).catch((err) => console.log(err));
+
+        console.log(matchData);
+
+        setLoading(false);
 
         return () => {
             if (connection) {
@@ -138,8 +156,16 @@ export default function FmField(fieldProps : FmFieldProps)
             }
         }
 
-
+        
     }, []);
+
+   
+
+    if(!loading && opponentPlayer != undefined)
+    {
+        sendFirstMove().finally(() => {setFirstMove(false);});
+    }
+    
 
     return(
         <>

@@ -12,6 +12,7 @@ import Image from 'next/image';
 import FmWinLoseMessage from '../fmwinnlosemessage/fmwinlosemessage';
 import { FmTimer } from '../fmtimer/fmtimer';
 import { FmModal } from '../fmmodal/fmmodal';
+import { useRouter } from 'next/navigation';
 
 
 interface FmFieldProps {
@@ -31,6 +32,7 @@ export default function FmField(fieldProps : FmFieldProps)
     const rows = 6;
 
     const sessionData = useSelector((state: any) => state.session);
+    const router = useRouter();
 
     const [loading, setLoading] = useState<boolean>(true);
     
@@ -57,6 +59,7 @@ export default function FmField(fieldProps : FmFieldProps)
 
     const [helpModal, setHelpModal] = useState<boolean>(false);
     const [exitModal, setExitModal] = useState<boolean>(false);
+    const [canceledGame, setCanceledGame] = useState<boolean>(false);
 
 
     const currentPlayerColor = matchData?.playerRed.id === currentPlayer?.id ? -1 : 1;
@@ -91,7 +94,12 @@ export default function FmField(fieldProps : FmFieldProps)
     }
 
 
-    
+    async function abortGame()
+    {
+        var matchId = fieldProps.matchId;
+        await connection?.invoke("AbortMatch", matchId).catch((err) => console.log(err));
+        router.push('/game/lobby');
+    }
 
     
 
@@ -110,6 +118,10 @@ export default function FmField(fieldProps : FmFieldProps)
                 setMatchData(matchData);
                 setTimerTime(new Date(matchData.finishedAt));
                 connect.invoke("GetPlayers", matchData.id).catch((err) => console.log(err));
+            });
+
+            connect.on('MatchCanceled', () => {
+                setCanceledGame(true);
             });
 
             connect.on('ReceivePlayers', (players) => {
@@ -248,8 +260,11 @@ export default function FmField(fieldProps : FmFieldProps)
             </p>
             <br/>
         </FmModal>
-        <FmModal visible={exitModal} onOk={()=>{setExitModal(false)}} textOk='Stay' textCancel='Leave' onCancel={()=>{setExitModal(false)}}>
+        <FmModal visible={exitModal} onOk={()=>{setExitModal(false)}} textOk='Stay' textCancel='Leave' onCancel={()=>{abortGame()}}>
             <h3>Are you sure you want to leave the game?</h3>
+        </FmModal>
+        <FmModal visible={canceledGame} onOk={()=>{router.push('/game/lobby')}} onCancel={()=>{}} textOk='To Lobby' hideCancel>
+            <h3>Your oponnent left the game...</h3>
         </FmModal>
         {winNotification && <FmWinLoseMessage winner={winner == currentPlayerColor ? 1 : 0}></FmWinLoseMessage>}
         

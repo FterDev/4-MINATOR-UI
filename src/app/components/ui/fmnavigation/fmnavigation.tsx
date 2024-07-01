@@ -36,14 +36,12 @@ let FmNavigation: React.FC<FmNavigationProps> = (props) => {
                         <FmNavButtonContent text='Play' icon={<Image src='/img/logo_transparent.png' alt='play' width={0} height={0} sizes='100vw' className='fm-navigation-button-logo'/>}/>                        
                     } className='fm-navigation-button' onClick={() => router.push("/game/lobby")}/>
                     
-                    <Flex justify='space-between'>
-                        <FmButton color='primary' text={
+                    <FmButton color='primary' text={
                             <FmNavButtonContent text='Leaderboard' icon={<TrophyOutlined className='fm-navigation-button-icon' />}/>                        
                         } className='fm-navigation-button' onClick={() => {}} />
-                        <FmButton color='primary' text={
-                            <FmNavButtonContent text='Settings' icon={<SettingOutlined className='fm-navigation-button-icon' />}/>                        
-                        } className='fm-navigation-button' onClick={() => {}} />
-                    </Flex>
+                    <FmButton color='primary' text={
+                        <FmNavButtonContent text='Settings' icon={<SettingOutlined className='fm-navigation-button-icon' />}/>                        
+                    } className='fm-navigation-button' onClick={() => {}} />
 
                     <FmButton color='secondary' text={
                         <FmNavButtonContent text='Sign out' icon={<PoweroffOutlined className='fm-navigation-button-icon' />}/>                        

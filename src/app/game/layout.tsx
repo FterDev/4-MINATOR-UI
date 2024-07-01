@@ -2,13 +2,12 @@
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import React, { use, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db, storage } from '../firebase';
-import { get } from 'firebase/database';
 import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { setNickname, setSession } from '../slices/sessionSlice';
 import FmLoading from '../components/ui/fmloading/fmloading';
+import { useState } from 'react';
 
 
 async function getUserData(userId: string) {
@@ -37,7 +36,7 @@ export default function Layout({
     children: React.ReactNode
   }) {
 
-    const [loading, setLoading] = React.useState(true);
+    const [loading, setLoading] = useState(true);
 
     const sessionData = useSelector((state: any) => state.session);
     const dispatch = useDispatch();

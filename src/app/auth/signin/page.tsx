@@ -96,7 +96,7 @@ export default function SignIn()
     return (
         <form onSubmit={handleSignIn}>
             <Auth text="Please login to start playing.">
-                <FmInput id="email" name="email" title="E-Mail" value={email} onBlur={(e) => setEmailError(emailValidation.validateEmail(e))} onChange={(e) => setEmail(e)} isErrored={emailError.isErrored} errorText={emailError.errorText} placeholder="fluffy@unicorn.com" type="email" textAlign="center" />
+                <FmInput id="email" name="email" title="E-Mail" value={email} onBlur={(e) => setEmailError(emailValidation.validateEmail(e))} onChange={(e) => setEmail(e)} isErrored={emailError.isErrored} errorText={emailError.errorText} placeholder="test@test.com" type="email" textAlign="center" />
                 <FmInput id="password" name="password" title="Password" value={password} onBlur={(e) => setPasswordError(passwordValidation.validateOnlyEmpty(e))} onChange={(e) => setPassword(e)} isErrored={passwordError.isErrored} errorText={passwordError.errorText} placeholder="●●●●●●●" type="password" textAlign="center" />
                 <FmButton text={loading ? <LoadingOutlined /> : "Sign in"} isDisabled={loading} className="signin-button" submmit />
                 <FmLink text="Forgot your password?" href="/auth/forgot" className="signin-link"/>

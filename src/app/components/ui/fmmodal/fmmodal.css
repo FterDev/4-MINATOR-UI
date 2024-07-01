@@ -13,6 +13,13 @@
     opacity: 0;
 }
 
+.hide
+{
+    visibility: hidden;
+    opacity: 0;
+
+}
+
 .visible
 {
     visibility: visible;

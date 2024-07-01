@@ -38,6 +38,7 @@ export default function FmField(fieldProps : FmFieldProps)
     const [fieldState, setFieldState] = useState(new Array(cols).fill(new Array(rows).fill(0)));
     const [moveCounter, setMoveCounter] = useState<number>(0);
     const [firstMove, setFirstMove] = useState<boolean>(true);
+    const [joker, setJoker] = useState<number>(0);
 
     const [timerTime, setTimerTime] = useState<Date>(new Date());
 
@@ -77,6 +78,15 @@ export default function FmField(fieldProps : FmFieldProps)
             console.log('first move');
             await connection?.invoke("FirstBotMove",matchId).catch((err) => console.log(err));
             
+        }
+    }
+
+    async function useJoker()
+    {
+        if(joker > 0)
+        {
+            var matchId = fieldProps.matchId;
+            await connection?.invoke("UseJoker", matchId, opponentPlayer.isBot, matchData.botLevel).catch((err) => console.log(err));
         }
     }
 
@@ -121,8 +131,10 @@ export default function FmField(fieldProps : FmFieldProps)
 
             connect.on('ReceiveGameBoard', (gameBoard) => {
                 var gameBoard = JSON.parse(gameBoard);
-             
                 
+                console.log(gameBoard.PlayerJoker[currentPlayerColor]);
+                
+                setJoker(gameBoard.PlayerJoker[currentPlayerColor]);
                 setPlayerTurn(gameBoard.CurrentPlayer);
                 setMoveCounter(gameBoard.Moves);
                 setFieldState(gameBoard.Board);
@@ -208,7 +220,7 @@ export default function FmField(fieldProps : FmFieldProps)
                     </Flex>
                 </Flex>
                 <Flex className='fm-field-header' justify='center' align='center'>
-                    <FmButton className='fm-field-button' text={'Joker (2x)'} />
+                    <FmButton className='fm-field-button' text={`Joker (${joker}x)`} onClick={() => useJoker()} />
                 </Flex>
             </Flex>
         </FmCard>

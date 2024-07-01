@@ -148,7 +148,7 @@ export default function FmField(fieldProps : FmFieldProps)
             <Flex vertical>
                 <Flex justify='space-evenly' className='fm-field-header'>
                     <FmButton className='fm-field-button' text={'Help'}></FmButton>
-                    <Flex vertical justify='space-between' className='fm-field-header-status'>
+                    <Flex vertical justify='center' align='center' className='fm-field-header-status'>
                         <FmTimer targetTime={timerTime}></FmTimer>
                     </Flex>
                     <FmButton className='fm-field-button' text={'Leave Game'} color='danger'></FmButton>

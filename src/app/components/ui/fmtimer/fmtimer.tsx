@@ -9,6 +9,11 @@ interface IFmTimerProps {
     targetTime: Date;
 }
 
+function getTimezoneOffset(): number {
+    const date = new Date();
+    return date.getTimezoneOffset();
+}
+
 
 
 export const FmTimer: React.FC<IFmTimerProps> = (props) => {

@@ -13,6 +13,7 @@ import FmLoading from '../fmloading/fmloading';
 import { set } from 'firebase/database';
 import FmWinLoseMessage from '../fmwinnlosemessage/fmwinlosemessage';
 import { FmTimer } from '../fmtimer/fmtimer';
+import { FmModal } from '../fmmodal/fmmodal';
 
 
 interface FmFieldProps {
@@ -36,8 +37,6 @@ export default function FmField(fieldProps : FmFieldProps)
     // 0 = empty / -1 = red / 1 = yellow -> init fill with 0
     const [fieldState, setFieldState] = useState(new Array(cols).fill(new Array(rows).fill(0)));
 
-    const [loading, setLoading] = useState<boolean>(true);
-
     const [timerTime, setTimerTime] = useState<Date>(new Date());
 
     const [connection, setConnection] = useState<HubConnection | null>(null);
@@ -54,6 +53,8 @@ export default function FmField(fieldProps : FmFieldProps)
     const [winNotification, setWinNotification] = useState<boolean>(false);
     const [winState , setWinState] = useState<number>(0);
 
+    const [helpModal, setHelpModal] = useState<boolean>(false);
+    const [exitModal, setExitModal] = useState<boolean>(false);
 
 
     const currentPlayerColor = matchData?.playerRed.id === currentPlayer?.id ? -1 : 1;
@@ -127,8 +128,6 @@ export default function FmField(fieldProps : FmFieldProps)
             connect.invoke("JoinMatch", fieldProps.matchId).catch((err) => console.log(err));
             connect.invoke("GetGameBoard", fieldProps.matchId).catch((err) => console.log(err));
 
-            setLoading(false);
-
         }).catch((err) => console.log(err));
 
         return () => {
@@ -147,7 +146,7 @@ export default function FmField(fieldProps : FmFieldProps)
         <FmCard className='fm-field-card'>
             <Flex vertical>
                 <Flex justify='space-evenly' className='fm-field-header'>
-                    <FmButton className='fm-field-button' text={'Help'}></FmButton>
+                    <FmButton className='fm-field-button' text={'Help'} onClick={() => setHelpModal(true)}></FmButton>
                     <Flex vertical justify='center' align='center' className='fm-field-header-status'>
                         <FmTimer targetTime={timerTime}></FmTimer>
                     </Flex>
@@ -187,7 +186,32 @@ export default function FmField(fieldProps : FmFieldProps)
                 </Flex>
             </Flex>
         </FmCard>
+        <FmModal visible={helpModal} onOk={()=>{setHelpModal(false)}} onCancel={()=>{setHelpModal(false)}}>
+            <h3>Connect 4 Rules</h3>
+            <br/><br/>
+            <p>
+                <b>Objective:</b> Be the first to connect four of your colored discs in a row, either vertically, horizontally, or diagonally.
+            </p>
+            <br/>
+            <p>
+                <b>Setup:</b> The game is played on a 7-column by 6-row grid.
+            </p>
+            <br/>
+            <p>
+                <b>Play:</b> Players take turns dropping one colored disc from the top into a column. The disc falls down the column until it reaches the bottom of the column or another disc.
+            </p>
+            <br/>
+            <p>
+                <b>Winning:</b> The first player to connect four of their discs in a row wins.
+            </p>
+            <br/>
+            <p>
+                <b>Draw:</b> If the board is full and no player has connected four discs in a row, the game is a draw.
+            </p>
+            <br/>
+        </FmModal>
         {winNotification && <FmWinLoseMessage winner={winner == currentPlayerColor ? 1 : 0}></FmWinLoseMessage>}
+        
         </>
     )
 }
